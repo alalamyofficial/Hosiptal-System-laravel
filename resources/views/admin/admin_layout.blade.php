@@ -133,6 +133,14 @@
 							</ul>
                         </li>
                         <li>
+                            <a><i class="fa fa-users"></i> <span>Employees</span> <span class="menu-arrow"></span></a>
+                            <ul style="display: none;">
+								<li><a href="{{route('employee.create')}}">Add Employee</a></li>
+								<li><a href="{{route('employee.show')}}">Employees</a></li>
+
+							</ul>
+                        </li>
+                        <li>
                             <a><i class="fa fa-calendar"></i> <span>Appointments</span><span class="menu-arrow"></span></a>
 
                             <ul style="display: none;">

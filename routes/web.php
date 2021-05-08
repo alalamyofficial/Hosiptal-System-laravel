@@ -40,6 +40,11 @@ Route::post('admin/create/doctor','DoctorController@store')->name('doctor.store'
 Route::get('admin/show/doctor','DoctorController@index')->name('doctor.show');
 
 
+//employees
+Route::get('admin/create/employee','EmployeeController@create')->name('employee.create');
+Route::post('admin/create/employee','EmployeeController@store')->name('employee.store');
+Route::get('admin/show/employee','EmployeeController@index')->name('employee.show');
+
 //nurse
 Route::get('admin/create/nurse','NurseController@create')->name('nurse.create');
 Route::post('admin/create/nurse','NurseController@store')->name('nurse.store');
