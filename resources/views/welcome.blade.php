@@ -83,7 +83,7 @@
                                     <a class="nav-link" href="/">Home</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="about.html">about</a>
+                                    <a class="nav-link" href="{{route('about')}}">about</a>
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link" href="{{route('all.doctors')}}">Doctors</a>
@@ -169,7 +169,7 @@
                                         <i class="<?php echo $service->icon;?>" style="width:50px"></i> 
                                         </span>
                                         <h4>{{$service->title}}</h4>
-                                        <p>{{$service->description}}</p>
+                                        <p>{{\Illuminate\Support\Str::limit(strip_tags($service->description),40)}}</p>
                                     </div>
                                 </div>
                             </div>
@@ -500,7 +500,7 @@
             <div class="container">
                 <div class="row align-items-center">
                     <p class="footer-text m-0 col-lg-8 col-md-12"><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-                    Copyright &copy; All rights reserved By Mohamed Alalamey
+                    Copyright &copy; All rights reserved | This template is made with by Mohamed Alalamey
 <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></p>
                     <div class="col-lg-4 col-md-12 text-center text-lg-right footer-social">
                         <a href="#"><i class="ti-facebook"></i></a>

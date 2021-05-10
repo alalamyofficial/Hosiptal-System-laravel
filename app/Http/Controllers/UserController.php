@@ -25,23 +25,5 @@ class UserController extends Controller
 
     }
 
-    public function add_to_favorite($id){
 
-        $service = Service::find($id);
-
-        $favorite = session()->get('favourite');
-
-        $favorite = [
-
-            $id => [
-                "title" => $service->title,
-                "description" => $service->description,
-                "icon" => $service->photo
-            ]
-
-        ];
-
-
-
-    }
 }

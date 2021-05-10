@@ -15,6 +15,7 @@ use App\Appointment;
 use App\BookAppointment;
 use App\Service;
 use Auth;
+use App\Mail;
 
 
 session_start();
@@ -43,9 +44,10 @@ class AdminController extends Controller
             $mynookappointment = BookAppointment::all();
             $myreservation = BookAppointment::all();
             $services  = Service::all();
+            $mails = Mail::all();
     
     
-            return view('admin.dashboard',compact('myreservation','patients','doctors','dash_settings','appointments','departments','mynookappointment','services'));
+            return view('admin.dashboard',compact('myreservation','patients','doctors','dash_settings','appointments','departments','mynookappointment','services','mails'));
         
         }else{
 

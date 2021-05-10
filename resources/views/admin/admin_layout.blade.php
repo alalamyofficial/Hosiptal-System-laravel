@@ -21,7 +21,8 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/regular.min.css" integrity="sha512-Nqct4Jg8iYwFRs/C34hjAF5og5HONE2mrrUV1JZUswB+YU7vYSPyIjGMq+EAQYDmOsMuO9VIhKpRUa7GjRKVlg==" crossorigin="anonymous" />
     <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/solid.min.css" integrity="sha512-jQqzj2vHVxA/yCojT8pVZjKGOe9UmoYvnOuM/2sQ110vxiajBU+4WkyRs1ODMmd4AfntwUEV4J+VfM6DkfjLRg==" crossorigin="anonymous" /> -->
 
-
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous"></script>
+    
     <!-- @notifyCss -->
     <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.9.0/fullcalendar.js"></script> -->
 
@@ -199,7 +200,7 @@
 
 
                         <li>
-                            <a href="{{route('admin.mails')}}"><i class="fa fa-envelope-square"></i> <span>Mails</span> <span class="badge badge-pill bg-primary float-right">5</span></a>
+                            <a href="{{route('admin.mails')}}"><i class="fa fa-envelope-square"></i> <span>Mails</span> <span class="badge badge-pill bg-primary float-right">{{count($mails)}}</span></a>
                         </li>
 
                         <li>
@@ -441,6 +442,19 @@
 
         </div>
     </div>
+    <script>
+
+        $(document).ready(function(){
+        $("#search").on("keyup", function() {
+            var value = $(this).val().toLowerCase();
+            $("#myTable tr").filter(function() {
+            $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+            });
+        });
+        });
+
+    </script>
+
     <div class="sidebar-overlay" data-reff=""></div>
     <script src="{{asset('assets2/js/jquery-3.2.1.min.js')}}"></script>
 	<script src="{{asset('assets2/js/popper.min.js')}}"></script>

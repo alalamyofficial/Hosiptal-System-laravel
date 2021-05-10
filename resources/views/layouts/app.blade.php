@@ -88,15 +88,6 @@
 
                     </ul>
 
-                    <ul class="navbar-nav" style="position:relative; margin-left:20px">
-
-                        <strong><a href="{{route('user.services')}}">
-
-                            Services
-                        </a>
-                        </strong>
-
-                    </ul>
 
                     <ul class="navbar-nav" style="position:relative; margin-left:20px;">
 
@@ -109,16 +100,7 @@
                     </ul>
 
 
-                    <ul class="navbar-nav" style="position:relative; margin-left:150px; color:red ">
 
-                        <strong><a href="{{route('user.day')}}">
-
-                            <i class="fab fa-gratipay fa-2x"></i>(0)
-                        
-                        </a>
-                        </strong>
-
-                    </ul>
 
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ml-auto">

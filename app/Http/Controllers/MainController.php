@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\DashboardSettings;
 use App\WebsiteSettings;
 use App\Service;
+use App\Doctor;
 
 class MainController extends Controller
 {
@@ -26,6 +27,13 @@ class MainController extends Controller
 
     public function all_doctors(){
 
-        return view('all_doctors');
+        $doctors = Doctor::all();
+
+        return view('all_doctors',compact('doctors'));
+    }
+
+    public function about(){
+
+        return view('about');
     }
 }

@@ -128,5 +128,6 @@ Route::get('all/doctors','MainController@all_doctors')->name('all.doctors');
 
 
 //user services
-Route::get('user/services','ServiceController@user_services')->name('user.services')->middleware('auth');
+// Route::get('user/services','ServiceController@user_services')->name('user.services')->middleware('auth');
 
+Route::get('about','MainController@about')->name('about');

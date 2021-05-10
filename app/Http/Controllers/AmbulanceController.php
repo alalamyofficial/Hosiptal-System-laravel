@@ -6,6 +6,7 @@ use App\Ambulance;
 use Illuminate\Http\Request;
 use RealRashid\SweetAlert\Facades\Alert;
 use App\DashboardSettings;
+use App\Mail;
 
 class AmbulanceController extends Controller
 {
@@ -79,8 +80,9 @@ class AmbulanceController extends Controller
         $dash_settings = DashboardSettings::all();
 
         $ambulances = Ambulance::all();
+        $mails = Mail::all();
 
-        return view('admin.ambulance.show',compact('ambulances','dash_settings'));
+        return view('admin.ambulance.show',compact('ambulances','dash_settings','mails'));
     }
 
     /**

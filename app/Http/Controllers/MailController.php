@@ -72,7 +72,7 @@ class MailController extends Controller
     {
         $dash_settings = DashboardSettings::all();
 
-        $mails  = Mail::all();
+        $mails  = Mail::orderBy('id','desc')->paginate(5);
 
         return view('admin.mails.show',compact('dash_settings','mails'));
     }

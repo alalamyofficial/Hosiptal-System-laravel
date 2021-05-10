@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>medical</title>
     <link rel="icon" href="{{asset('assets/img/favicon.png')}}">
-    <!-- Bootstrap CSS -->
+
     <link rel="stylesheet" href="{{asset('assets/css/bootstrap.min.css')}}">
     <!-- animate CSS -->
     <link rel="stylesheet" href="{{asset('assets/css/animate.css')}}">
@@ -30,20 +30,20 @@
 <body>
     <!--::header part start::-->
     <header class="main_menu">
-        <div class="container">
-            <div class="row align-items-center">
-                <div class="col-lg-12">
-                    <nav class="navbar navbar-expand-lg navbar-light">
-                        <a class="navbar-brand" href="/"> <img src="{{asset('assets/img/logo.png')}}" alt="logo"> </a>
-                        <button class="navbar-toggler" type="button" data-toggle="collapse"
-                            data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
-                            aria-expanded="false" aria-label="Toggle navigation">
-                            <span class="navbar-toggler-icon"></span>
-                        </button>
-
-                        <div class="collapse navbar-collapse main-menu-item justify-content-end"
-                            id="navbarSupportedContent">
-                            <ul class="navbar-nav align-items-center">
+            <div class="container">
+                <div class="row align-items-center">
+                    <div class="col-lg-12">
+                        <nav class="navbar navbar-expand-lg navbar-light">
+                            <a class="navbar-brand" href="index.html"> <img src="img/logo.png" alt="logo"> </a>
+                            <button class="navbar-toggler" type="button" data-toggle="collapse"
+                                data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                                aria-expanded="false" aria-label="Toggle navigation">
+                                <span class="navbar-toggler-icon"></span>
+                            </button>
+    
+                            <div class="collapse navbar-collapse main-menu-item justify-content-end"
+                                id="navbarSupportedContent">
+                                <ul class="navbar-nav align-items-center">
                                 <li class="nav-item active">
                                     <a class="nav-link" href="/">Home</a>
                                 </li>
@@ -65,13 +65,13 @@
                                 </li>
 
                             </ul>
-                        </div>
-                    </nav>
+                            </div>
+                        </nav>
+                    </div>
                 </div>
             </div>
-        </div>
-    </header>
-    <!-- Header part end-->
+        </header>
+        <!-- Header part end-->
 
     <!-- breadcrumb start-->
     <section class="breadcrumb breadcrumb_bg">
@@ -80,8 +80,8 @@
                 <div class="col-lg-12">
                     <div class="breadcrumb_iner">
                         <div class="breadcrumb_iner_item">
-                            <h2>Doctors</h2>
-                            <p>Home<span>/</span>Doctors</p>
+                            <h2>About Us</h2>
+                            <p>Home<span>/</span>About Us</p>
                         </div>
                     </div>
                 </div>
@@ -90,37 +90,92 @@
     </section>
     <!-- breadcrumb start-->
 
-    <!--::doctor_part start::-->
-    <section class="doctor_part section_padding single_doctor_part">
+    <!-- our_ability part start-->
+    <section class="our_ability section_padding">
         <div class="container">
-            <div class="row justify-content-center">
-                <div class="col-xl-8">
-                    <div class="section_tittle text-center">
-                        <h2> Experienced Doctors</h2>
-                        <p>Face replenish sea good winged bearing years air divide wasHave night male also</p>
+            <div class="row justify-content-between align-items-center">
+                <div class="col-md-6 col-lg-6">
+                    <div class="our_ability_img">
+                        <img src="{{asset('assets/img/ability_img.png')}}" alt="">
                     </div>
                 </div>
-            </div>
-            <div class="row">
-                <div class="col-sm-6 col-lg-3">
-                    <div class="single_blog_item">
-                        <div class="single_blog_img">
-                        @foreach($doctors as $doctor)
-                            <img src="{{asset($doctor->image)}}" alt="doctor">
-                        </div>
-                        <div class="single_text">
-                            <div class="single_blog_text">
-                                <h3>{{$doctor->first_name}} {{$doctor->last_name}}</h3>
-                                <p>{{$doctor->departments->name}}</p>
-                            </div>
-                        </div>
-                        @endforeach
+                <div class="col-md-6 col-lg-5">
+                    <div class="our_ability_member_text">
+                        <h2>Our Patients
+                            Are at the Centre of
+                            Everything We Do</h2>
+                        <p>Kind lesser bring said midst they're created signs made the beginni years
+                            created Beast upon whales herb seas evening she'd day green dominion
+                            evening in moved have fifth in won't in darkness fruitful god behold
+                            whos without bring created creature.</p>
+                        <ul>
+                            <li><span class="ti-mouse"></span>Modern Technology</li>
+                            <li><span class="ti-heart-broken"></span>Worldclass Facilities</li>
+                            <li><span class="ti-package"></span>Experienced Nurse</li>
+                            <li><span class="ti-headphone-alt"></span>24 Hours Support</li>
+                        </ul>
                     </div>
                 </div>
             </div>
         </div>
     </section>
-    <!--::doctor_part end::-->
+    <!-- our_ability part end-->
+
+    <!--::review_part start::-->
+    <section class="review_part">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-10">
+                    <div class="client_review_part owl-carousel">
+                        <div class="client_review_single">
+                            <img src="img/Quote.png" class="Quote" alt="quote">
+                            <div class="client_review_text">
+                                <p>Also made from. Give may saying meat there from heaven it lights face had is gathered
+                                    god dea earth light for life may itself shall whales made they're blessed whales
+                                    also made from give
+                                    may saying meat. There from heaven it lights face had amazing place</p>
+                            </div>
+                            <h4>Mosan Cameron, <span>Executive of fedex</span></h4>
+                        </div>
+                        <div class="client_review_single">
+                            <img src="img/Quote.png" class="Quote" alt="quote">
+                            <div class="client_review_text media-body">
+                                <p>Also made from. Give may saying meat there from heaven it lights face had is gathered
+                                    god dea earth light for life may itself shall whales made they're blessed whales
+                                    also made from give
+                                    may saying meat. There from heaven it lights face had amazing place</p>
+                            </div>
+                            <h4>Mosan Cameron, <span>Executive of fedex</span></h4>
+                        </div>
+                        <div class="client_review_single">
+                            <img src="img/Quote.png" class="Quote" alt="quote">
+                            <div class="client_review_text">
+                                <p>Also made from. Give may saying meat there from heaven it lights face had is gathered
+                                    god dea earth light for life may itself shall whales made they're blessed whales
+                                    also made from give
+                                    may saying meat. There from heaven it lights face had amazing place</p>
+                            </div>
+                            <h4>Mosan Cameron, <span>Executive of fedex</span></h4>
+                        </div>
+                        <div class="client_review_single">
+                            <img src="img/Quote.png" class="Quote" alt="quote">
+                            <div class="client_review_text">
+                                <p>Also made from. Give may saying meat there from heaven it lights face had is gathered
+                                    god dea earth light for life may itself shall whales made they're blessed whales
+                                    also made from give
+                                    may saying meat. There from heaven it lights face had amazing place</p>
+                            </div>
+                            <h4>Mosan Cameron, <span>Executive of fedex</span></h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!--::review_part end::-->
+
+
+
 
     <!-- footer part start-->
     <footer class="footer-area">
@@ -198,7 +253,7 @@
             <div class="container">
                 <div class="row align-items-center">
                     <p class="footer-text m-0 col-lg-8 col-md-12"><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-Copyright &copy; All rights reserved | This template is made with by Mohamed Alalamey
+                    Copyright &copy; All rights reserved | This template is made with by Mohamed Alalamey
 <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></p>
                     <div class="col-lg-4 col-md-12 text-center text-lg-right footer-social">
                         <a href="#"><i class="ti-facebook"></i></a>
