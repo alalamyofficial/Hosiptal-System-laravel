@@ -6,7 +6,7 @@ use App\Service;
 use Illuminate\Http\Request;
 use App\DashboardSettings;
 use RealRashid\SweetAlert\Facades\Alert;
-
+use App\Mail;
 
 class ServiceController extends Controller
 {
@@ -17,10 +17,12 @@ class ServiceController extends Controller
      */
     public function index()
     {
+        $mails  = Mail::all();
+
         $services  = Service::all();
         $dash_settings = DashboardSettings::all();
 
-        return view('admin.services.show',compact('services','dash_settings'));
+        return view('admin.services.show',compact('services','dash_settings','mails'));
     }
 
     /**
@@ -30,9 +32,11 @@ class ServiceController extends Controller
      */
     public function create()
     {
+        $mails  = Mail::all();
+
         $dash_settings = DashboardSettings::all();
 
-        return view('admin.services.create',compact('dash_settings'));
+        return view('admin.services.create',compact('dash_settings','mails'));
     }
 
     public function user_services(){

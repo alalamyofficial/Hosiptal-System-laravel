@@ -50,8 +50,15 @@ return [
             'charset' => 'utf8mb4',
             'collation' => 'utf8mb4_unicode_ci',
             'prefix' => '',
-            'strict' => true,
+            'strict' => false,
             'engine' => null,
+        ],
+
+        'tracker' => [
+            'driver'   => 'mysql',
+            'host'     => '127.0.0.1',
+            'database' => 'health_care',
+            'strict' => false,    // to avoid problems on some MySQL installs
         ],
 
         'pgsql' => [

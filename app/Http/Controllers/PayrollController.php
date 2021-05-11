@@ -4,6 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Payroll;
 use Illuminate\Http\Request;
+use RealRashid\SweetAlert\Facades\Alert;
+use App\DashboardSettings;
+use App\WebsiteSettings;
+use App\Mail;
 
 class PayrollController extends Controller
 {
@@ -14,7 +18,10 @@ class PayrollController extends Controller
      */
     public function index()
     {
-        //
+        $dash_settings = DashboardSettings::all();
+        $mails = Mail::all();
+
+        return view('admin.payroll.show',compact('dash_settings','mails'));
     }
 
     /**
@@ -24,7 +31,10 @@ class PayrollController extends Controller
      */
     public function create()
     {
-        //
+        $dash_settings = DashboardSettings::all();
+        $mails = Mail::all();
+
+        return view('admin.payroll.create',compact('dash_settings','mails'));
     }
 
     /**
@@ -35,7 +45,26 @@ class PayrollController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request,[
+
+            'salary' =>'required',
+            'name' =>'required',
+            'role' =>'required',
+
+        ]);
+
+        $payrolls = new Payroll; 
+
+        $payrolls->name = $request->name;
+        $payrolls->role = $request->role;
+        $payrolls->salary = $request->salary;
+
+        $payrolls->save();
+
+        Alert::success('Success', 'Payroll Added Successfully !');
+
+
+        return redirect()->route('payroll.show');
     }
 
     /**

@@ -160,7 +160,11 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
         App\Providers\BotMan\DriverServiceProvider::class,
-        Mckenziearts\Notify\LaravelNotifyServiceProvider::class
+        Mckenziearts\Notify\LaravelNotifyServiceProvider::class,
+        Stevebauman\Location\LocationServiceProvider::class,
+        PragmaRX\Tracker\Vendor\Laravel\ServiceProvider::class,
+        Shetabit\Visitor\Provider\VisitorServiceProvider::class,
+
 
     ],
 
@@ -210,6 +214,11 @@ return [
         'URL' => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
+        'Location' => 'Stevebauman\Location\Facades\Location',
+        'Tracker' => 'PragmaRX\Tracker\Vendor\Laravel\Facade',
+        'Visitor' => Shetabit\Visitor\Facade\Visitor::class,
+
+
 
     ],
 

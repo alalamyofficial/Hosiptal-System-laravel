@@ -20,7 +20,10 @@
         "laravel/tinker": "^1.0",
         "mckenziearts/laravel-notify": "1.0",
         "nexmo/laravel-notification": "^0.2.1",
-        "realrashid/sweet-alert": "^3.2"
+        "pragmarx/tracker": "^4.0",
+        "realrashid/sweet-alert": "^3.2",
+        "shetabit/visitor": "^3.1",
+        "stevebauman/location": "^6.1"
     },
     "require-dev": {
         "beyondcode/laravel-dump-server": "^1.0",

@@ -92,6 +92,13 @@ Route::group(['prefix' => 'admin'], function () {
     Route::get('mails','MailController@show')->name('admin.mails');
     Route::get('mails/content/{id}','MailController@content')->name('admin.mails.contents');
 
+    //Payrolls
+    Route::get('add/payroll','PayrollController@create')->name('payroll.create');
+    Route::post('add/payroll','PayrollController@store')->name('payroll.show');
+
+
+    Route::get('visitors','VisitorController@my_visitors')->name('admin.visitor');
+
     Route::post('logout', 'AdminController@logout')->name('admin.logout');
 });
 
@@ -131,3 +138,7 @@ Route::get('all/doctors','MainController@all_doctors')->name('all.doctors');
 // Route::get('user/services','ServiceController@user_services')->name('user.services')->middleware('auth');
 
 Route::get('about','MainController@about')->name('about');
+
+
+
+Route::get('/geoip','TestController@test');

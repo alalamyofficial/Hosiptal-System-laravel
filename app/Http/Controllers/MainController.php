@@ -7,6 +7,8 @@ use App\DashboardSettings;
 use App\WebsiteSettings;
 use App\Service;
 use App\Doctor;
+use Shetabit\Visitor\Traits\Visitor;
+
 
 class MainController extends Controller
 {
@@ -14,6 +16,8 @@ class MainController extends Controller
 
         $settings = WebsiteSettings::orderBy('id', 'desc')->paginate(1);
         $services  = Service::first()->paginate(4);
+
+        visitor()->visit();
 
         return view('welcome',compact('settings','services'));
 

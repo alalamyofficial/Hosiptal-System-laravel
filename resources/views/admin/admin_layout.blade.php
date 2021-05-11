@@ -178,8 +178,8 @@
 						<li class="submenu">
 							<a href=""><i class="fa fa-book"></i> <span> Payroll </span> <span class="menu-arrow"></span></a>
 							<ul style="display: none;">
-								<li><a href="salary.html"> Employee Salary </a></li>
-								<li><a href="salary-view.html"> Payslip </a></li>
+								<li><a href="{{route('payroll.create')}}"> Add Employee Salary </a></li>
+								<li><a href="{{route('payroll.show')}}"> Employee Salary </a></li>
 							</ul>
 						</li>
 
@@ -205,6 +205,10 @@
 
                         <li>
                             <a href="chat.html"><i class="fa fa-code"></i> <span>Embadded</span></a>
+                        </li>
+
+                        <li>
+                            <a href="{{route('admin.visitor')}}"><i class="fa fa-code"></i> <span>Who Visit me</span></a>
                         </li>
 
 
