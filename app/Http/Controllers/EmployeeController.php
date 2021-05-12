@@ -6,6 +6,7 @@ use App\Employee;
 use Illuminate\Http\Request;
 use RealRashid\SweetAlert\Facades\Alert;
 use App\DashboardSettings;
+use App\Mail;
 
 class EmployeeController extends Controller
 {
@@ -18,8 +19,9 @@ class EmployeeController extends Controller
     {
         $employees = Employee::all();
         $dash_settings = DashboardSettings::all();
+        $mails = Mail::all();
 
-        return view('admin.employee.show',compact('employees','dash_settings'));
+        return view('admin.employee.show',compact('employees','dash_settings','mails'));
 
     }
 
@@ -31,8 +33,9 @@ class EmployeeController extends Controller
     public function create()
     {
         $dash_settings = DashboardSettings::all();
+        $mails = Mail::all();
 
-        return view('admin.employee.create',compact('dash_settings'));
+        return view('admin.employee.create',compact('dash_settings','mails'));
     }
 
     /**

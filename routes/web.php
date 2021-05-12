@@ -32,7 +32,8 @@ Route::group(['prefix' => 'admin'], function () {
     
     Route::get('dashboard', 'AdminController@dashboard')->name('admin.dashboard');
     Route::post('dashboard', 'AdminController@Todashboard')->name('admin.Todashboard');
-    
+
+    //patient
     Route::get('create/patient','PatientController@create')->name('patient.create');
     Route::post('create/patient','PatientController@store')->name('patient.store');
     Route::get('show/patient','PatientController@index')->name('patient.show');
@@ -64,9 +65,9 @@ Route::group(['prefix' => 'admin'], function () {
     
     
     //services
-    Route::get('service/create','serviceController@create')->name('service.create');
-    Route::post('service/store','serviceController@store')->name('service.store');
-    Route::get('service/show','serviceController@index')->name('service.show');
+    Route::get('service/create','ServiceController@create')->name('service.create');
+    Route::post('service/store','ServiceController@store')->name('service.store');
+    Route::get('service/show','ServiceController@index')->name('service.show');
     
     
     //settings
@@ -94,7 +95,8 @@ Route::group(['prefix' => 'admin'], function () {
 
     //Payrolls
     Route::get('add/payroll','PayrollController@create')->name('payroll.create');
-    Route::post('add/payroll','PayrollController@store')->name('payroll.show');
+    Route::post('add/payroll','PayrollController@store')->name('payroll.store');
+    Route::get('payrolls','PayrollController@index')->name('payroll.show');
 
 
     Route::get('visitors','VisitorController@my_visitors')->name('admin.visitor');

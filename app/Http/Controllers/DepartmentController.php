@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\DashboardSettings;
 use App\WebsiteSettings;
 use RealRashid\SweetAlert\Facades\Alert;
+use App\Mail;
 
 class DepartmentController extends Controller
 {
@@ -19,8 +20,9 @@ class DepartmentController extends Controller
     {
         $departments = Department::all();
         $dash_settings = DashboardSettings::all();
+        $mails = Mail::all();
 
-        return view('admin.department.show',compact('departments','dash_settings'));
+        return view('admin.department.show',compact('departments','dash_settings','mails'));
     }
 
     /**
@@ -31,8 +33,9 @@ class DepartmentController extends Controller
     public function create()
     {
         $dash_settings = DashboardSettings::all();
-   
-        return view('admin.department.create',compact('dash_settings'));
+        $mails = Mail::all();
+
+        return view('admin.department.create',compact('dash_settings','mails'));
         
     }
 

@@ -8,6 +8,7 @@ use App\WebsiteSettings;
 use App\Service;
 use App\Doctor;
 use Shetabit\Visitor\Traits\Visitor;
+use App\Mail;
 
 
 class MainController extends Controller

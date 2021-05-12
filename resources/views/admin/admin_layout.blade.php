@@ -208,7 +208,7 @@
                         </li>
 
                         <li>
-                            <a href="{{route('admin.visitor')}}"><i class="fa fa-code"></i> <span>Who Visit me</span></a>
+                            <a href="{{route('admin.visitor')}}"><i class="far fa-user-circle"></i> <span>Who Visit me</span></a>
                         </li>
 
 

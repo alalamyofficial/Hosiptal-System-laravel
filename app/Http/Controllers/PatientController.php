@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\DashboardSettings;
 use App\WebsiteSettings;
 use RealRashid\SweetAlert\Facades\Alert;
+use App\Mail;
 
 class PatientController extends Controller
 {
@@ -17,10 +18,12 @@ class PatientController extends Controller
      */
     public function index()
     {
+        $mails = Mail::all();
+
         $patients = Patient::all();
         $dash_settings = DashboardSettings::all();
 
-        return view('admin.patient.show',compact('patients','dash_settings'));
+        return view('admin.patient.show',compact('patients','dash_settings','mails'));
     }
 
     /**
@@ -30,9 +33,11 @@ class PatientController extends Controller
      */
     public function create()
     {
+        $mails = Mail::all();
+
         $dash_settings = DashboardSettings::all();
 
-        return view('admin.patient.create',compact('dash_settings'));
+        return view('admin.patient.create',compact('dash_settings','mails'));
     }
 
     /**

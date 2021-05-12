@@ -20,8 +20,9 @@ class PayrollController extends Controller
     {
         $dash_settings = DashboardSettings::all();
         $mails = Mail::all();
+        $payrolls = Payroll::all();
 
-        return view('admin.payroll.show',compact('dash_settings','mails'));
+        return view('admin.payroll.show',compact('dash_settings','mails','payrolls'));
     }
 
     /**
@@ -47,9 +48,9 @@ class PayrollController extends Controller
     {
         $this->validate($request,[
 
-            'salary' =>'required',
             'name' =>'required',
             'role' =>'required',
+            'salary' =>'required',
 
         ]);
 
@@ -65,6 +66,7 @@ class PayrollController extends Controller
 
 
         return redirect()->route('payroll.show');
+        // return redirect()->back();
     }
 
     /**

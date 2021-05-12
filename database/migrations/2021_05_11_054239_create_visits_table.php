@@ -17,7 +17,7 @@ class CreateVisitsTable extends Migration
             $table->bigIncrements('id');
             $table->string('method')->nullable();
             $table->mediumText('request')->nullable();
-            $table->mediumText('url')->nullable();
+            $table->mediumText('uri')->nullable();
             $table->mediumText('referer')->nullable();
             $table->text('languages')->nullable();
             $table->text('useragent')->nullable();

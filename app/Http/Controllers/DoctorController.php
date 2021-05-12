@@ -10,7 +10,7 @@ use App\DashboardSettings;
 use App\WebsiteSettings;
 use App\Department;
 use RealRashid\SweetAlert\Facades\Alert;
-
+use App\Mail;
 
 class DoctorController extends Controller
 {
@@ -24,8 +24,9 @@ class DoctorController extends Controller
         $departments = Department::all();
         $doctors = Doctor::all();
         $dash_settings = DashboardSettings::all();
+        $mails = Mail::all();
 
-        return view('admin.doctor.show',compact('doctors','dash_settings','departments'));
+        return view('admin.doctor.show',compact('doctors','dash_settings','departments','mails'));
 
     }
 
@@ -36,9 +37,11 @@ class DoctorController extends Controller
      */
     public function create()
     {
+        $mails = Mail::all();
+
         $departments = Department::all();
         $dash_settings = DashboardSettings::all();
-        return view('admin.doctor.create',compact('dash_settings','departments'));
+        return view('admin.doctor.create',compact('dash_settings','departments','mails'));
 
     }
 

@@ -17,7 +17,7 @@ class CreatePayrollsTable extends Migration
             $table->increments('id');
             $table->string('name');
             $table->string('role');
-            $table->string('salary');
+            $table->integer('salary');
 
             $table->timestamps();
         });

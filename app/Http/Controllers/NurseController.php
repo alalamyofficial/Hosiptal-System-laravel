@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use App\DashboardSettings;
 use App\Department;
 use RealRashid\SweetAlert\Facades\Alert;
-
+use App\Mail;
 
 class NurseController extends Controller
 {
@@ -18,10 +18,12 @@ class NurseController extends Controller
      */
     public function index()
     {
+        $mails = Mail::all();
+
         $departments = Department::all();
         $dash_settings = DashboardSettings::all();
         $nurses = Nurse::all();
-        return view('admin.nurse.show',compact('departments','dash_settings','nurses'));
+        return view('admin.nurse.show',compact('departments','dash_settings','nurses','mails'));
     }
 
     /**
@@ -33,7 +35,9 @@ class NurseController extends Controller
     {
         $departments = Department::all();
         $dash_settings = DashboardSettings::all();
-        return view('admin.nurse.create',compact('departments','dash_settings'));
+        $mails = Mail::all();
+
+        return view('admin.nurse.create',compact('departments','dash_settings','mails'));
     }
 
     /**

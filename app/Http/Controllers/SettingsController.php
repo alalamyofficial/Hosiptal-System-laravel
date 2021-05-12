@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\DashboardSettings;
 use App\WebsiteSettings;
 use RealRashid\SweetAlert\Facades\Alert;
+use App\Mail;
 
 
 class SettingsController extends Controller
@@ -13,16 +14,17 @@ class SettingsController extends Controller
     public function dashboardSettings(){
 
         $dash_settings = DashboardSettings::all();
-
-        return view('admin.settings.dashboard',compact('dash_settings'));
+        $mails = Mail::all();
+        return view('admin.settings.dashboard',compact('dash_settings','mails'));
 
     }
 
     public function websiteSettings(){
 
         $dash_settings = DashboardSettings::all();
+        $mails = Mail::all();
 
-        return view('admin.settings.website',compact('dash_settings'));
+        return view('admin.settings.website',compact('dash_settings','mails'));
 
     }
 

@@ -14,7 +14,7 @@ use Auth;
 use App\Notifications\ReservationNotification;
 use Notification;
 use Illuminate\Notifications\Notifiable;
-
+use App\Mail;
 
 class BookAppointmentController extends Controller
 {
@@ -30,8 +30,9 @@ class BookAppointmentController extends Controller
         $departments = Department::all();
         $doctors = Doctor::all();
         $myreservation = BookAppointment::where('user_id', $userId)->get();
+        $mails = Mail::all();
 
-        return view('reservation',compact('doctors','myreservation'));
+        return view('reservation',compact('doctors','myreservation','mails'));
 
     }
 
@@ -45,8 +46,9 @@ class BookAppointmentController extends Controller
 
         $departments = Department::all();
         $doctors = Doctor::all();
+        $mails = Mail::all();
 
-        return view('book_appointment',compact('departments','doctors'));
+        return view('book_appointment',compact('departments','doctors','mails'));
     }
 
     /**

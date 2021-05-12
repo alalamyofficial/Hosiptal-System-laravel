@@ -26,7 +26,7 @@
 
                     <div class="col-lg-8 offset-lg-2">
 
-                        <form action="{{route('payroll.show')}}" method="POST" enctype="multipart/form-data">
+                        <form action="{{route('payroll.store')}}" method="POST" enctype="multipart/form-data">
                         @csrf
                             <div class="row">
                                 <div class="col-sm-6">
@@ -50,11 +50,12 @@
                                             <option value="food_services_staff">Food services staff</option>
                                             <option value="environmental_services_staff">Environmental services staff</option>
                                             <option value="pharmacy_staff">Pharmacy staff</option>
+                                            <option value="cleaner">Cleaner</option>
                                         
                                         </select>
                                     </div>
                                 </div>
-                                <div class="col-sm-6">
+                                <div class="col-sm-6 col-md-6 col-lg-6">
                                     <div class="form-group">
                                         <label>Salary<span class="text-danger">*</span></label>
                                         <input class="form-control" type="number" name="salary">

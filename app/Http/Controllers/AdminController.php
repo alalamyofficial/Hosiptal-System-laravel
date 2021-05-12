@@ -17,8 +17,14 @@ use App\Service;
 use Auth;
 use App\Mail;
 
+if(!isset($_SESSION)) 
+{ 
+    session_start(); 
+}
+// session_start();
 
-session_start();
+// session_status() === PHP_SESSION_ACTIVE ?: session_start();
+
 
 class AdminController extends Controller
 {
@@ -98,10 +104,11 @@ class AdminController extends Controller
 
     public function reservation(){
 
+        $mails = Mail::all();
         $myreservation = BookAppointment::all();
         $doctors = Doctor::latest()->paginate(5);
         $dash_settings = DashboardSettings::all();
-        return view('admin.reservation',compact('myreservation','doctors','dash_settings'));
+        return view('admin.reservation',compact('myreservation','doctors','dash_settings','mails'));
 
 
     }
