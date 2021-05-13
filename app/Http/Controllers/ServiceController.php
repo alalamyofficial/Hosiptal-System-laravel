@@ -97,9 +97,15 @@ class ServiceController extends Controller
      * @param  \App\Service  $service
      * @return \Illuminate\Http\Response
      */
-    public function edit(Service $service)
+    public function edit(Service $service,$id)
     {
-        //
+        $mails  = Mail::all();
+
+        $dash_settings = DashboardSettings::all();
+
+        $service = Service::findOrFail($id);
+
+        return view('admin.services.edit',compact('dash_settings','mails','service'));
     }
 
     /**
@@ -109,9 +115,35 @@ class ServiceController extends Controller
      * @param  \App\Service  $service
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Service $service)
+    public function update(Request $request, Service $service , $id)
     {
-        //
+        $this->validate($request,[
+
+
+            'title' => 'required',
+            'icon' => 'required',
+            'description' => 'required',
+
+
+        ]);
+
+        $update_services = [
+
+            'title' => $request->title,
+            'icon' => $request->icon,
+            'description' => $request->description,
+
+        ];
+
+        Service::whereId($id)->update($update_services);
+        
+        Alert::success('Success', 'Service Updated Successfully !');
+
+
+        return redirect()->route('service.show');
+
+
+
     }
 
     /**

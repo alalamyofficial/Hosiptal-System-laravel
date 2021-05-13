@@ -84,9 +84,14 @@ class DepartmentController extends Controller
      * @param  \App\Department  $department
      * @return \Illuminate\Http\Response
      */
-    public function edit(Department $department)
+    public function edit(Department $department,$id)
     {
-        //
+        $department = Department::findOrFail($id);
+
+        $dash_settings = DashboardSettings::all();
+        $mails = Mail::all();
+
+        return view('admin.department.edit',compact('department','dash_settings','mails'));
     }
 
     /**
@@ -96,9 +101,30 @@ class DepartmentController extends Controller
      * @param  \App\Department  $department
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Department $department)
+    public function update(Request $request, Department $department , $id)
     {
-        //
+        $this->validate($request,[
+
+            'name' => 'required|min:3'
+
+        ]);
+
+        $update_departments = [
+
+            'name' => $request->name
+
+        ];
+
+
+
+        Department::whereId($id)->update($update_departments);
+        
+        Alert::success('Success', 'Department Updated Successfully !');
+
+
+        return redirect()->route('department.show');
+
+
     }
 
     /**

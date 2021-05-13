@@ -45,10 +45,12 @@ Route::group(['prefix' => 'admin'], function () {
     
     
     //employees
-    Route::get('create/employee','EmployeeController@create')->name('employee.create');
-    Route::post('create/employee','EmployeeController@store')->name('employee.store');
-    Route::get('show/employee','EmployeeController@index')->name('employee.show');
-    
+    Route::get('employee/create','EmployeeController@create')->name('employee.create');
+    Route::post('employee/create','EmployeeController@store')->name('employee.store');
+    Route::get('employee/show','EmployeeController@index')->name('employee.show');
+    Route::get('employee/edit/{id}','EmployeeController@edit')->name('employee.edit');
+    Route::patch('employee/update/{id}','EmployeeController@update')->name('employee.update');
+
     //nurse
     Route::get('create/nurse','NurseController@create')->name('nurse.create');
     Route::post('create/nurse','NurseController@store')->name('nurse.store');
@@ -62,13 +64,16 @@ Route::group(['prefix' => 'admin'], function () {
     Route::get('department/create','DepartmentController@create')->name('department.create');
     Route::post('department/store','DepartmentController@store')->name('department.store');
     Route::get('department/show','DepartmentController@index')->name('department.show');
-    
+    Route::get('department/edit/{id}','DepartmentController@edit')->name('department.edit');
+    Route::patch('department/update/{id}','DepartmentController@update')->name('department.update');
+
     
     //services
     Route::get('service/create','ServiceController@create')->name('service.create');
     Route::post('service/store','ServiceController@store')->name('service.store');
     Route::get('service/show','ServiceController@index')->name('service.show');
-    
+    Route::get('service/edit/{id}','ServiceController@edit')->name('service.edit');
+    Route::post('service/update/{id}','ServiceController@update')->name('service.update');
     
     //settings
     Route::get('dashboard/settings','SettingsController@dashboardSettings')->name('dashboard.settings');

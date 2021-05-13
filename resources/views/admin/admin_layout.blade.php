@@ -159,6 +159,9 @@
 							</ul>                        
                         </li>
                         <li>
+                            <a href="schedule.html"><i class="fa fa-calendar-check-o"></i> <span>Doctor Schedule</span></a>
+                        </li>
+                        <li>
                             <a><i class="fa fa-hospital-o"></i> <span>Departments</span> <span class="menu-arrow"></span> </a>
                             <ul style="display: none;">
 								<li><a href="{{route('department.create')}}">Add Department</a></li>
@@ -197,6 +200,10 @@
 								<li><a href="{{route('service.show')}}">Services</a></li>
 							</ul>
 						</li>
+
+                        <li>
+                            <a href="schedule.html"><i class="far fa-heart"></i></i> <span>Operations</span></a>
+                        </li>
 
 
                         <li>

@@ -113,9 +113,13 @@ class EmployeeController extends Controller
      * @param  \App\Employee  $employee
      * @return \Illuminate\Http\Response
      */
-    public function edit(Employee $employee)
+    public function edit(Employee $employee , $id)
     {
-        //
+        $employee = Employee::findOrFail($id);
+        $dash_settings = DashboardSettings::all();
+        $mails = Mail::all();
+
+        return view('admin.employee.edit',compact('employee','dash_settings','mails'));
     }
 
     /**
@@ -125,9 +129,88 @@ class EmployeeController extends Controller
      * @param  \App\Employee  $employee
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Employee $employee)
+    public function update(Request $request, Employee $employee ,$id)
     {
-        //
+        $this->validate($request,[
+
+            'name' => "required",
+            'email' => "required",
+            'date_of_birth' => "required",
+            'gender' => "required",
+            'phone_number' => "required",
+            'image' => "required",
+            'country' => "required",
+            'city' => "required",
+            'age' => "required",
+            'role' => "required",
+            'bio' => "required",
+    
+        ]);
+
+        $employee = Employee::findOrFail($id);
+
+        if ($request->has('image')){
+
+
+            $img_file = $request->image;
+    
+            $new_image = time().$img_file->getClientOriginalName();
+    
+            $img_file->move('public/imgs/',$new_image);
+
+            $employee->image = 'public/imgs/'.$new_image;
+
+            $update_employees = [
+    
+                "name" => $request->name,
+                "email" => $request->email,
+                "date_of_birth" => $request->date_of_birth,
+                "phone_number" => $request->phone_number,
+                "age" => $request->age,
+                "role" => $request->role,
+                "country" => $request->country,
+                'city' => $request->city,
+                "bio" => $request->bio,
+                "gender" => $request->gender,
+                "image" => 'public/imgs/'.$new_image,
+            ];
+
+        }else{
+
+            $update_employees = [
+    
+                "name" => $request->name,
+                "email" => $request->email,
+                "date_of_birth" => $request->date_of_birth,
+                "phone_number" => $request->phone_number,
+                "age" => $request->age,
+                "role" => $request->role,
+                "country" => $request->country,
+                'city' => $request->city,
+                "bio" => $request->bio,
+                "gender" => $request->gender,
+            ];
+
+        }
+
+        $employee->update($update_employees);
+
+
+        $employee->save();
+
+        Alert::success('Success', 'Employee Updated Successfully !');
+
+
+        return redirect()->route('employee.show');
+
+
+
+
+
+
+
+
+
     }
 
     /**
