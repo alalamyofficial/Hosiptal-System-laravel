@@ -21,6 +21,7 @@ class PatientController extends Controller
         $mails = Mail::all();
 
         $patients = Patient::all();
+
         $dash_settings = DashboardSettings::all();
 
         return view('admin.patient.show',compact('patients','dash_settings','mails'));
@@ -95,9 +96,15 @@ class PatientController extends Controller
      * @param  \App\Patient  $patient
      * @return \Illuminate\Http\Response
      */
-    public function edit(Patient $patient)
+    public function edit(Patient $patient ,$id)
     {
-        //
+        $mails = Mail::all();
+
+        $patient = Patient::findOrFail($id);
+
+        $dash_settings = DashboardSettings::all();
+
+        return view('admin.patient.edit',compact('patient','dash_settings','mails'));
     }
 
     /**
@@ -107,9 +114,40 @@ class PatientController extends Controller
      * @param  \App\Patient  $patient
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Patient $patient)
+    public function update(Request $request, Patient $patient,$id)
     {
-        //
+        $this->validate($request, [
+
+            'name' => 'required|string',
+            'email' => 'required|string',
+            'phone_number' => 'required|numeric',
+            'age' => 'required|numeric',
+            'disease_type' => 'required|string',
+            'gender' => 'required|boolean', 
+
+        ]);
+
+        $update_patient = [
+
+            "name" => $request->name,
+            "email" => $request->email,
+            "phone_number" => $request->phone_number,
+            "disease_type" => $request->disease_type,
+            "gender" => $request->gender,
+            "age" => $request->age,
+
+        ];
+
+        Patient::whereId($id)->update($update_patient);
+
+        // $patient->save();
+
+        Alert::success('Success', 'Patient Updated Successfully !');
+
+
+        return redirect()->route('patient.show');
+
+
     }
 
     /**

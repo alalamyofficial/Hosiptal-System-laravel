@@ -18,7 +18,7 @@
                         </div>
                     @endif
 
-                        <h4 class="page-title">Edit Employee</h4>
+                        <h4 class="page-title">Edit Doctor</h4>
                     </div>
                 </div>
 
@@ -26,22 +26,27 @@
 
                     <div class="col-lg-8 offset-lg-2">
 
-                        <form action="{{route('employee.update', $employee->id)}}" method="POST" enctype="multipart/form-data">
+                        <form action="{{route('doctor.update',$doctor->id)}}" method="POST" enctype="multipart/form-data">
                         @csrf
                         @method('patch')
                             <div class="row">
                                 <div class="col-sm-6">
                                     <div class="form-group">
-                                        <label>Name<span class="text-danger">*</span></label>
-                                        <input class="form-control" type="text" name="name" value="{{$employee->name}}">
+                                        <label>First Name <span class="text-danger">*</span></label>
+                                        <input class="form-control" type="text" name="first_name" value="{{$doctor->first_name}}">
                                     </div>
                                 </div>
-
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label>Last Name</label>
+                                        <input class="form-control" type="text" name="last_name" value="{{$doctor->last_name}}">
+                                    </div>
+                                </div>
 
                                 <div class="col-sm-6">
                                     <div class="form-group">
                                         <label>Email <span class="text-danger">*</span></label>
-                                        <input class="form-control" type="email" name="email" value="{{$employee->email}}">
+                                        <input class="form-control" type="email" name="email" value="{{$doctor->email}}">
                                     </div>
                                 </div>
                             
@@ -50,7 +55,7 @@
                                     <div class="form-group">
                                         <label>Date of Birth</label>
                                         <div class="cal-icon">
-                                            <input type="date" class="form-control datetimepicker" name="date_of_birth" value="{{$employee->date_of_birth}}">
+                                            <input type="date" class="form-control datetimepicker" name="date_of_birth" value="{{$doctor->date_of_birth}}">
                                         </div>
                                     </div>
                                 </div>
@@ -58,9 +63,11 @@
                                 <div class="col-sm-6 col-md-6 col-lg-3">
                                     <div class="form-group">
                                         <label>Gender</label>
-                                        <select class="form-control select" width="300px" name="gender" value="{{$employee->gender}}">
-                                            <option value="1" @if (old('gender') == 1) selected="selected" @endif>Male</option>
-                                            <option value="0" @if (old('gender') == 0) selected="selected" @endif>Female</option>  
+                                        <select class="form-control select" width="300px" name="gender">
+                                            
+                                            <option value="1" <?php echo (request()->session()->get('gender') == 'Male') ? 'selected' : '' ?>>Male</option>
+                                            <option value="0" <?php echo (request()->session()->get('gender') == 'Female') ? 'selected' : '' ?>>Female</option>  
+                                        
                                         </select>
                                     </div>
 								</div>
@@ -68,18 +75,18 @@
                                 <div class="col-lg-3">
                                     <div class="form-group">
                                         <label>Phone </label>
-                                        <input class="form-control" type="text" name="phone_number" value="{{$employee->phone_number}}">
+                                        <input class="form-control" type="text" name="phone_number" value="{{$doctor->phone_number}}"> 
                                     </div>
                                 </div>
 
-                                <div class="col-lg-12">
+                                <div class="col-lg-3">
                                     <div class="form-group">
                                         <label>Age </label>
-                                        <input class="form-control" type="number" name="age" value="{{$employee->age}}">
+                                        <input class="form-control" type="number" name="age" value="{{$doctor->age}}">
                                     </div>
                                 </div>
 
-                                <div class="col-sm-6 col-md-6 col-lg-12">
+                                <div class="col-sm-6">
 									<div class="form-group">
 										<label>Avatar</label>
 										<div class="profile-upload">
@@ -87,19 +94,23 @@
 												<img alt="avatar" src="{{asset('assets2/img/user.jpg')}}">
 											</div>
 											<div class="upload-input">
-												<input type="file" class="form-control" name="image" value="{{$employee->image}}">
+												<input type="file" class="form-control" name="image" value="{{$doctor->image}}">
 											</div>
 										</div>
 									</div>
                                 </div>
 
-                                
-                                <div class="col-sm-6 col-md-6 col-lg-6">
-                                    <div class="form-group">
-                                        <label>Role</label>
-                                        <input type="text" class="form-control" name="role" value="{{$employee->role}}">
-                                    </div>
+                                <div class="col-sm-6">
+									<div class="form-group">
+										<label>Upload CV</label>
+										<div class="profile-upload">
+											<div class="upload-input">
+												<input type="file" class="form-control" name="cv" value="{{$doctor->cv}}">
+											</div>
+										</div>
+									</div>
                                 </div>
+
                                 
                                 <div class="col-sm-6 col-md-6 col-lg-6">
                                     <div class="form-group">
@@ -170,7 +181,7 @@
                                         <option value="Dominica">Dominica</option> 
                                         <option value="Dominican Republic">Dominican Republic</option> 
                                         <option value="Ecuador">Ecuador</option> 
-                                        <option value="Egypt" @if (old('country') == 'Egypt') selected="selected" @endif>Egypt</option> 
+                                        <option value="Egypt">Egypt</option> 
                                         <option value="El Salvador">El Salvador</option> 
                                         <option value="Equatorial Guinea">Equatorial Guinea</option> 
                                         <option value="Eritrea">Eritrea</option> 
@@ -354,7 +365,7 @@
                                 <div class="col-sm-6 col-md-6 col-lg-6">
                                     <div class="form-group">
                                         <label>City</label>
-                                        <input type="text" class="form-control" name="city" value="{{$employee->city}}">
+                                        <input type="text" class="form-control" name="city" value="{{$doctor->city}}">
                                     </div>
                                 </div>
 
@@ -363,14 +374,45 @@
                             
 							<div class="form-group">
                                 <label>Short Biography</label>
-                                <textarea class="form-control" rows="3" cols="30" name="bio" value="{{$employee->bio}}">{{$employee->bio}}</textarea>
+                                <textarea class="form-control" rows="3" cols="30" name="bio">{{$doctor->bio}}</textarea>
                             </div>
-                            <br><br>            
+                
+
+                                <label for="appt">Choose a time for your Start:</label>
+
+                                <input type="time" id="appt" name="start" value="{{$doctor->start}}"
+                                min="09:00" max="18:00" required>
+                                <br><br>
+
+
+                                
+                                
+                                
+                                <label for="appt">Choose a time for your End:</label>
+
+                                <input type="time" id="appt" name="end" value="{{$doctor->end}}"
+                                min="09:00" max="18:00" required>
+                                <br><br>
+
+
+
+                                <div class="form-group">
+                                    <label>Department</label>
+                                    <select class="select" tabindex="-1" aria-hidden="true" name="department_id">
+                                        <option>Select</option>
+                                            @foreach($departments as $department)
+                                        <option value="{{$department->id}}"> {{$department->name}} </option>
+                                        @endforeach
+                                    </select>
+                                </div>    
+                                
+                                <br><br>    
+                            
 
        
 
                             <div class="m-t-20 text-center">
-                                <button class="btn btn-success submit-btn">Edit Employee</button>
+                                <button class="btn btn-success submit-btn">Update Doctor</button>
                             </div>
 
                         </form>

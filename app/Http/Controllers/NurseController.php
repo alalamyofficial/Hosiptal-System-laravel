@@ -131,9 +131,15 @@ class NurseController extends Controller
      * @param  \App\Nurse  $nurse
      * @return \Illuminate\Http\Response
      */
-    public function edit(Nurse $nurse)
+    public function edit(Nurse $nurse, $id)
     {
-        //
+        $departments = Department::all();
+        $dash_settings = DashboardSettings::all();
+        $mails = Mail::all();
+
+        $nurse = Nurse::findOrFail($id);
+
+        return view('admin.nurse.edit',compact('departments','dash_settings','mails','nurse'));
     }
 
     /**
@@ -143,9 +149,106 @@ class NurseController extends Controller
      * @param  \App\Nurse  $nurse
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Nurse $nurse)
+    public function update(Request $request, Nurse $nurse , $id)
     {
-        //
+        
+        $this->validate($request,[
+            
+            'first_name' => 'required|string',
+            'last_name' => 'required|string',
+            'email' => 'required|string' ,
+            'date_of_birth' => 'required|date',
+            'gender' => 'required|boolean' ,
+            'phone_number' => 'required|numeric',
+            'image' => 'required',
+            'country' => 'required',
+            'city' => 'required',
+            'age' => 'required',
+            'cv' => 'required' ,
+            'bio' => 'required',
+            'start' => 'required',
+            'end' => 'required',
+            'department_id' => 'required',
+
+
+        ]);
+
+        $nurse = Nurse::findOrFail($id);
+        
+        if ($request->has('image')){
+
+
+            $img_file = $request->image;
+
+            $new_image = time().$img_file->getClientOriginalName();
+
+            $img_file->move('public/imgs/',$new_image);
+
+            $nurse->image = 'public/imgs/'.$new_image;
+
+
+            $update_nurse = [
+
+
+                "first_name" => $request->first_name,
+                "last_name" => $request->last_name,
+                "email" => $request->email,
+                "date_of_birth" => $request->date_of_birth,
+                "gender" => $request->gender,
+                "phone_number" => $request->phone_number,
+                "country" => $request->country,
+                "city" => $request->city,
+                "age" => $request->age,
+                "bio" => $request->bio,
+                "start" => $request->start,
+                "end" => $request->end,
+                "department_id" => $request->department_id,
+                "image" => 'public/imgs/'.$new_image
+
+            ];
+
+
+
+
+        }else{
+
+            $update_nurse = [
+
+
+                "first_name" => $request->first_name,
+                "last_name" => $request->last_name,
+                "email" => $request->email,
+                "date_of_birth" => $request->date_of_birth,
+                "gender" => $request->gender,
+                "phone_number" => $request->phone_number,
+                "country" => $request->country,
+                "city" => $request->city,
+                "age" => $request->age,
+                "bio" => $request->bio,
+                "start" => $request->start,
+                "end" => $request->end,
+                "department_id" => $request->department_id,
+
+            ];
+
+        }
+
+        
+        $nurse->update($update_nurse);
+
+
+        $nurse->save();
+
+        Alert::success('Success', 'Nurse Updated Successfully !');
+
+
+        return redirect()->route('nurse.show');
+
+
+
+
+
+
     }
 
     /**

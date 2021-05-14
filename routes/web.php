@@ -34,15 +34,19 @@ Route::group(['prefix' => 'admin'], function () {
     Route::post('dashboard', 'AdminController@Todashboard')->name('admin.Todashboard');
 
     //patient
-    Route::get('create/patient','PatientController@create')->name('patient.create');
-    Route::post('create/patient','PatientController@store')->name('patient.store');
-    Route::get('show/patient','PatientController@index')->name('patient.show');
+    Route::get('patient/create','PatientController@create')->name('patient.create');
+    Route::post('patient/create','PatientController@store')->name('patient.store');
+    Route::get('patient/show','PatientController@index')->name('patient.show');
+    Route::get('patient/edit/{id}','PatientController@edit')->name('patient.edit');
+    Route::patch('patient/update/{id}','PatientController@update')->name('patient.update');
 
-    //doctor
-    Route::get('create/doctor','DoctorController@create')->name('doctor.create');
-    Route::post('create/doctor','DoctorController@store')->name('doctor.store');
-    Route::get('show/doctor','DoctorController@index')->name('doctor.show');
     
+    //doctor
+    Route::get('doctor/create','DoctorController@create')->name('doctor.create');
+    Route::post('doctor/store','DoctorController@store')->name('doctor.store');
+    Route::get('doctor/show','DoctorController@index')->name('doctor.show');
+    Route::get('doctor/edit/{id}','DoctorController@edit')->name('doctor.edit');
+    Route::patch('doctor/update/{id}','DoctorController@update')->name('doctor.update');
     
     //employees
     Route::get('employee/create','EmployeeController@create')->name('employee.create');
@@ -52,10 +56,11 @@ Route::group(['prefix' => 'admin'], function () {
     Route::patch('employee/update/{id}','EmployeeController@update')->name('employee.update');
 
     //nurse
-    Route::get('create/nurse','NurseController@create')->name('nurse.create');
-    Route::post('create/nurse','NurseController@store')->name('nurse.store');
-    Route::get('show/nurse','NurseController@index')->name('nurse.show');
-    
+    Route::get('nurse/create','NurseController@create')->name('nurse.create');
+    Route::post('nurse/create','NurseController@store')->name('nurse.store');
+    Route::get('nurse/show','NurseController@index')->name('nurse.show');
+    Route::get('nurse/edit/{id}','NurseController@edit')->name('nurse.edit');
+    Route::patch('nurse/update/{id}','NurseController@update')->name('nurse.update');
     
     //users
     Route::get('users/list','UserController@index')->name('users.list');

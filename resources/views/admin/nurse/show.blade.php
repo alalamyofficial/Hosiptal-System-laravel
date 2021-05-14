@@ -26,8 +26,7 @@
 										<th>Country</th>
 										<th>City</th>
 										<th>Age</th>
-										<th>Start</th>
-										<th>End</th>
+
 										<th>Bio</th>
 										<th>Join</th>
 
@@ -67,8 +66,6 @@
 										<th>{{$nurse->country}}</th>
 										<th>{{$nurse->city}}</th>
 										<th>{{$nurse->age}}</th>
-										<td>{{$nurse->start}}</td>
-										<td>{{$nurse->end}}</td>
 										<td>{{\Illuminate\Support\Str::limit(strip_tags($nurse->bio),40)}}</td>
 										<td>{{$nurse->created_at->diffForHumans()}}</td>
 
@@ -76,8 +73,12 @@
 											<div class="dropdown dropdown-action">
 												<a href="#" class="action-icon dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="fa fa-ellipsis-v"></i></a>
 												<div class="dropdown-menu dropdown-menu-right">
-													<a class="dropdown-item" href="edit-patient.html"><i class="fa fa-pencil m-r-5"></i> Edit</a>
+												<form action="" method="post">
+												@csrf
+													<a class="dropdown-item" href="{{route('nurse.edit',$nurse->id)}}"><i class="fa fa-pencil m-r-5"></i> Edit</a>
 													<a class="dropdown-item" href="#" data-toggle="modal" data-target="#delete_patient"><i class="fa fa-trash-o m-r-5"></i> Delete</a>
+												
+												</form>
 												</div>
 											</div>
 										</td>

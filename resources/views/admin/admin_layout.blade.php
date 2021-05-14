@@ -205,7 +205,15 @@
                             <a href="schedule.html"><i class="far fa-heart"></i></i> <span>Operations</span></a>
                         </li>
 
-
+                        <li class="submenu">
+                            <a href="#"><i class="fa fa-commenting-o"></i> <span> Blog</span> <span class="menu-arrow"></span></a>
+                            <ul style="display: none;">
+                                <li><a href="blog.html">Blog</a></li>
+                                <li><a href="blog-details.html">Blog View</a></li>
+                                <li><a href="add-blog.html">Add Blog</a></li>
+                                <li><a href="edit-blog.html">Edit Blog</a></li>
+                            </ul>
+                        </li>
                         <li>
                             <a href="{{route('admin.mails')}}"><i class="fa fa-envelope-square"></i> <span>Mails</span> <span class="badge badge-pill bg-primary float-right">{{count($mails)}}</span></a>
                         </li>

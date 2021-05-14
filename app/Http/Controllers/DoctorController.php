@@ -138,9 +138,15 @@ class DoctorController extends Controller
      * @param  \App\Doctor  $doctor
      * @return \Illuminate\Http\Response
      */
-    public function edit(Doctor $doctor)
+    public function edit(Doctor $doctor, $id)
     {
-        //
+        $doctor = Doctor::findOrFail($id);
+
+        $departments = Department::all();
+        $dash_settings = DashboardSettings::all();
+        $mails = Mail::all();
+
+        return view('admin.doctor.edit',compact('doctor','dash_settings','departments','mails'));
     }
 
     /**
@@ -150,9 +156,104 @@ class DoctorController extends Controller
      * @param  \App\Doctor  $doctor
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Doctor $doctor)
+    public function update(Request $request, Doctor $doctor,$id)
     {
-        //
+        $this->validate($request,[
+            
+            'first_name' => 'required|string',
+            'last_name' => 'required|string',
+            'email' => 'required|string' ,
+            'date_of_birth' => 'required|date',
+            'gender' => 'required|boolean' ,
+            'phone_number' => 'required|numeric',
+            'image' => 'required',
+            'country' => 'required',
+            'city' => 'required',
+            'age' => 'required',
+            'cv' => 'required' ,
+            'bio' => 'required',
+            'start' => 'required',
+            'end' => 'required',
+            'department_id' => 'required',
+
+
+        ]);
+
+        $doctor = Doctor::findOrFail($id);
+
+        if($request->has('image')){
+
+            //for image
+
+            $img_file = $request->image;
+
+            $new_image = time().$img_file->getClientOriginalName();
+
+            $img_file->move('public/imgs/',$new_image);
+
+            $doctor->image = 'public/imgs/'.$new_image;
+
+            //for cv
+            $pdf_file = $request->file('cv');
+            $pdf_file->storeAs('public/pdfs/','cv.' . $pdf_file->getClientOriginalExtension());
+            $doctor->cv = 'storage/pdfs/cv.' . $pdf_file->getClientOriginalExtension();
+
+            $update_doctor =[
+
+                "first_name" => $request->first_name,
+                "last_name" => $request->last_name,
+                "email" => $request->email,
+                "date_of_birth" => $request->date_of_birth,
+                "gender" => $request->gender,
+                "phone_number" => $request->phone_number,
+                "country" => $request->country,
+                "city" => $request->city,
+                "age" => $request->age,
+                "bio" => $request->bio,
+                "start" => $request->start,
+                "end" => $request->end,
+                "department_id" => $request->department_id,
+                "image" => 'public/imgs/'.$new_image,
+                "cv" => 'storage/pdfs/cv.' . $pdf_file->getClientOriginalExtension()
+
+            ];
+
+        }else{
+
+
+            $update_doctor =[
+
+
+
+                "first_name" => $request->first_name,
+                "last_name" => $request->last_name,
+                "email" => $request->email,
+                "date_of_birth" => $request->date_of_birth,
+                "gender" => $request->gender,
+                "phone_number" => $request->phone_number,
+                "country" => $request->country,
+                "city" => $request->city,
+                "age" => $request->age,
+                "bio" => $request->bio,
+                "start" => $request->start,
+                "end" => $request->end,
+                "department_id" => $request->department_id,
+
+            ];
+
+        }
+
+                
+        $doctor->update($update_doctor);
+
+
+        $doctor->save();
+
+        Alert::success('Success', 'Dcotor Updated Successfully !');
+
+
+        return redirect()->route('doctor.show');
+
     }
 
     /**

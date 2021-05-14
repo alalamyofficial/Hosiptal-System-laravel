@@ -20,6 +20,7 @@
                                     <th scope="col">Ip</th>
                                     <th scope="col">Platform</th>
                                     <th scope="col">url</th>
+                                    <th scope="col">Since</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -37,7 +38,7 @@
                             die("Connection failed: " . $conn->connect_error);
                             }
 
-                            $sql = "SELECT id, device, browser, ip, platform ,uri FROM shetabit_visits";
+                            $sql = "SELECT id, device, browser, ip, platform ,uri ,created_at FROM shetabit_visits";
                             $result = $conn->query($sql);
 
                             if ($result->num_rows > 0) {
@@ -51,6 +52,7 @@
                                     echo "<td>$row[ip]</td>";
                                     echo "<td>$row[platform]</td>";
                                     echo "<td>$row[uri]</td>";
+                                    echo "<td>$row[created_at]</td>";
                                     echo "</tr>";
                                 
                                         

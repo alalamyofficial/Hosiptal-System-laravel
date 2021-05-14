@@ -1,4 +1,4 @@
-<!doctype html>
+﻿<!doctype html>
 <html>
     <head>
         <meta charset="utf-8">
@@ -12,7 +12,7 @@
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/botman-web-widget@0/build/assets/css/chat.min.css">
     <script>
 	    var botmanWidget = {
-	        aboutText: 'ssdsd',
+	        aboutText: 'alalamey',
 	        introMessage: "✋ Hi! I'm form codechief.org"
 	    };
     </script>
