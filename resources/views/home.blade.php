@@ -8,7 +8,6 @@
   <div class="row justify-content-center">
     <header>
         <form method="get" action="{{route('user.appointment')}}">
-        @csrf
         <section class="header-content">
             <h1>Welcome</h1>
             <p> Welcome to our studio. We are a passionated group of people,<br>

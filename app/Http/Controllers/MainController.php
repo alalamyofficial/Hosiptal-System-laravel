@@ -9,6 +9,7 @@ use App\Service;
 use App\Doctor;
 use Shetabit\Visitor\Traits\Visitor;
 use App\Mail;
+use App\Blog;
 
 
 class MainController extends Controller
@@ -41,4 +42,19 @@ class MainController extends Controller
 
         return view('about');
     }
+
+    public function all_services(){
+
+        $services = Service::all();
+
+        return view('visitors.services',compact('services'));
+    }
+
+    public function publicBlog(){
+
+        $posts = Blog::all();
+        return view('blog',compact('posts'));
+
+    }
+    
 }

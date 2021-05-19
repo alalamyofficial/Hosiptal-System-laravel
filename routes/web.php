@@ -48,6 +48,13 @@ Route::group(['prefix' => 'admin'], function () {
     Route::get('doctor/edit/{id}','DoctorController@edit')->name('doctor.edit');
     Route::patch('doctor/update/{id}','DoctorController@update')->name('doctor.update');
     
+    //Schedule
+    Route::get('doctor/schedule/create','DoctorScheduleController@create')->name('schedule.create');
+    Route::post('doctor/schedule/store','DoctorScheduleController@store')->name('schedule.store');
+    Route::get('doctor/schedule/show','DoctorScheduleController@index')->name('schedule.show');
+    Route::get('doctor/schedule/edit/{id}','DoctorScheduleController@edit')->name('schedule.edit');
+    Route::patch('doctor/schedule/update/{id}','DoctorScheduleController@update')->name('schedule.update');
+
     //employees
     Route::get('employee/create','EmployeeController@create')->name('employee.create');
     Route::post('employee/create','EmployeeController@store')->name('employee.store');
@@ -71,6 +78,13 @@ Route::group(['prefix' => 'admin'], function () {
     Route::get('department/show','DepartmentController@index')->name('department.show');
     Route::get('department/edit/{id}','DepartmentController@edit')->name('department.edit');
     Route::patch('department/update/{id}','DepartmentController@update')->name('department.update');
+
+    //operations
+    Route::get('operation/create','OperationController@create')->name('operation.create');
+    Route::post('operation/store','OperationController@store')->name('operation.store');
+    Route::get('operation/show','OperationController@index')->name('operation.show');
+    Route::get('operation/edit/{id}','OperationController@edit')->name('operation.edit');
+    Route::patch('operation/update/{id}','OperationController@update')->name('operation.update');
 
     
     //services
@@ -109,6 +123,14 @@ Route::group(['prefix' => 'admin'], function () {
     Route::get('payrolls','PayrollController@index')->name('payroll.show');
 
 
+    //blog
+    Route::get('blog/create','BlogController@create')->name('blog.create');
+    Route::post('blog/store','BlogController@store')->name('blog.store');
+    Route::get('blog/show','BlogController@index')->name('blog.show');
+    Route::get('blog/edit/{id}','BlogController@edit')->name('blog.edit');
+    Route::post('blog/update/{id}','BlogController@update')->name('blog.update');
+
+    //who visit me
     Route::get('visitors','VisitorController@my_visitors')->name('admin.visitor');
 
     Route::post('logout', 'AdminController@logout')->name('admin.logout');
@@ -144,6 +166,7 @@ Route::get('user/day', function () {
 Route::get('contact/us','MailController@create')->name('contact.us');
 Route::post('contact/us','MailController@store')->name('contact.sent');
 Route::get('all/doctors','MainController@all_doctors')->name('all.doctors');
+Route::get('all/services','MainController@all_services')->name('all.services');
 
 
 //user services
@@ -154,3 +177,7 @@ Route::get('about','MainController@about')->name('about');
 
 
 Route::get('/geoip','TestController@test');
+
+//main blog
+Route::get('blog','MainController@publicBlog')->name('blog');
+// Route::get('blog','BlogController@publicBlog')->name('blog');

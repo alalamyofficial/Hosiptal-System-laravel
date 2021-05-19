@@ -25,9 +25,6 @@
     <link rel="stylesheet" href="{{asset('assets/css/slick.css')}}">
     <!-- style CSS -->
     <link rel="stylesheet" href="{{asset('assets/css/style.css')}}">
-
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous" />
-
 </head>
 
 <body>
@@ -47,11 +44,11 @@
                         <div class="collapse navbar-collapse main-menu-item justify-content-end"
                             id="navbarSupportedContent">
                             <ul class="navbar-nav align-items-center">
-                                <li class="nav-item active">
+                            <li class="nav-item active">
                                     <a class="nav-link" href="/">Home</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="about.html">about</a>
+                                    <a class="nav-link" href="{{route('about')}}">about</a>
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link" href="{{route('all.doctors')}}">Doctors</a>
@@ -59,7 +56,7 @@
 
                                 <li class="nav-item dropdown">
         
-                                <a class="nav-link" href="{{route('all.services')}}">Services</a>
+                                    <a class="nav-link" href="Doctor.html">Services</a>
 
                                 </li>
 
@@ -72,7 +69,6 @@
                                 <li class="nav-item">
                                     <a class="nav-link" href="{{route('contact.us')}}">Contact</a>
                                 </li>
-
                             </ul>
                         </div>
                     </nav>
@@ -89,8 +85,8 @@
                 <div class="col-lg-12">
                     <div class="breadcrumb_iner">
                         <div class="breadcrumb_iner_item">
-                            <h2>services</h2>
-                            <p>Home<span>/</span>services</p>
+                            <h2>Our Blog</h2>
+                            <p>Home<span>/</span>Our Blog</p>
                         </div>
                     </div>
                 </div>
@@ -99,34 +95,65 @@
     </section>
     <!-- breadcrumb start-->
 
-    <!-- feature_part start-->
-    <section class="feature_part single_feature_part">
+
+    <!--================Blog Area =================-->
+    <section class="blog_area section_padding">
         <div class="container">
             <div class="row">
-                <div class="col-lg-12 col-md-8">
-                    <div class="feature_item">
-                        <div class="row">
+                <div class="col-lg-8 mb-5 mb-lg-0">
+                    <div class="blog_left_sidebar">
 
-                            @foreach($services as $service)
-                            <div class="col-lg-4 col-sm-4">
-                                <div class="single_feature">
-                                    <div class="single_feature_part">
-                                        <span class="single_feature_icon"><i class="<?php echo $service->icon;?>"></i></span>
-                                        <h4>{{$service->title}}</h4>
-                                        <p>{{$service->description}}</p>
-                                    </div>
-                                </div>
+                        @foreach($posts as $post)
+                        <article class="blog_item">
+                            <div class="blog_item_img">
+                                <img class="card-img rounded-0" src="{{$post->image}}" alt="">
+                                <a href="#" class="blog_item_date">
+                                    <h3>{{$post->created_at->diffForHumans()}}</h3>
+                                </a>
                             </div>
-                            @endforeach
 
-                        </div>
+                            <div class="blog_details">
+                                <a class="d-inline-block" href="single-blog.html">
+                                    <h2>{{$post->title}}</h2>
+                                </a>
+                                <p>{!!$post->description!!}</p>
+                                <ul class="blog-info-link">
+                                    <li><a href="#"><i class="far fa-user"></i> Travel, Lifestyle</a></li>
+                                    <li><a href="#"><i class="far fa-comments"></i> 03 Comments</a></li>
+                                </ul>
+                            </div>
+                        </article>
+                        @endforeach
+
+
+
+                        <nav class="blog-pagination justify-content-center d-flex">
+                            <ul class="pagination">
+                                <li class="page-item">
+                                    <a href="#" class="page-link" aria-label="Previous">
+                                        <i class="ti-angle-left"></i>
+                                    </a>
+                                </li>
+                                <li class="page-item">
+                                    <a href="#" class="page-link">1</a>
+                                </li>
+                                <li class="page-item active">
+                                    <a href="#" class="page-link">2</a>
+                                </li>
+                                <li class="page-item">
+                                    <a href="#" class="page-link" aria-label="Next">
+                                        <i class="ti-angle-right"></i>
+                                    </a>
+                                </li>
+                            </ul>
+                        </nav>
                     </div>
                 </div>
+
             </div>
         </div>
     </section>
-    <!-- feature_part start-->
-
+    <!--================Blog Area =================-->
 
     <!-- footer part start-->
     <footer class="footer-area">
@@ -221,11 +248,9 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 
     <!-- jquery plugins here-->
 
-    <!-- jquery plugins here-->
-
-    <script src="js/jquery-1.12.1.min.js"></script>
+    <script src="{{asset('assets/js/jquery-1.12.1.min.js')}}"></script>
     <!-- popper js -->
-    <script src="js/popper.min.js"></script>
+    <script src="{{asset('assets/js/popper.min.js')}}"></script>
     <!-- bootstrap js -->
     <script src="{{asset('assets/js/bootstrap.min.js')}}"></script>
     <!-- easing js -->

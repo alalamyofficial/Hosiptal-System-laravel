@@ -5,6 +5,8 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use App\Department;
 use App\BookAppointment;
+use App\DoctorSchedule;
+use App\Operation; 
 
 class Doctor extends Model
 {
@@ -43,5 +45,17 @@ class Doctor extends Model
 
         return $this->hasMany(BookAppointment::class);
 
+    }
+
+    public function schedules(){
+
+        return $this->hasMany(DoctorSchedule::class);
+
+
+    }
+
+    public function operations()
+    {
+        return $this->belongsToMany('App\Operation');
     }
 }

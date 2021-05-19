@@ -23,6 +23,7 @@
 										<th>Date Of Birth</th>
 										<th>Image</th>
 										<th>Cv</th>
+										<th>Department</th>
 										<th>Country</th>
 										<th>City</th>
 										<th>Age</th>
@@ -30,7 +31,6 @@
 										<th>Bio</th>
 										<th>Join</th>
 
-										<th>Department</th>
 										<th class="text-right">Action</th>
 									</tr>
 								</thead>

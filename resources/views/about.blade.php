@@ -25,6 +25,9 @@
     <link rel="stylesheet" href="{{asset('assets/css/slick.css')}}">
     <!-- style CSS -->
     <link rel="stylesheet" href="{{asset('assets/css/style.css')}}">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous" />
+
 </head>
 
 <body>
@@ -34,7 +37,7 @@
                 <div class="row align-items-center">
                     <div class="col-lg-12">
                         <nav class="navbar navbar-expand-lg navbar-light">
-                            <a class="navbar-brand" href="index.html"> <img src="img/logo.png" alt="logo"> </a>
+                        <a class="navbar-brand" href="/"> <img src="{{asset('assets/img/logo.png')}}" alt="logo"> </a>
                             <button class="navbar-toggler" type="button" data-toggle="collapse"
                                 data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
                                 aria-expanded="false" aria-label="Toggle navigation">
@@ -44,11 +47,12 @@
                             <div class="collapse navbar-collapse main-menu-item justify-content-end"
                                 id="navbarSupportedContent">
                                 <ul class="navbar-nav align-items-center">
+                                <ul class="navbar-nav align-items-center">
                                 <li class="nav-item active">
                                     <a class="nav-link" href="/">Home</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="{{route('about')}}">about</a>
+                                    <a class="nav-link" href="about.html">about</a>
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link" href="{{route('all.doctors')}}">Doctors</a>
@@ -56,13 +60,21 @@
 
                                 <li class="nav-item dropdown">
         
-                                    <a class="nav-link" href="Doctor.html">Services</a>
+                                <a class="nav-link" href="{{route('all.services')}}">Services</a>
+
+                                </li>
+
+                                <li class="nav-item dropdown">
+        
+                                    <a class="nav-link" href="{{route('blog')}}">Blog</a>
 
                                 </li>
 
                                 <li class="nav-item">
                                     <a class="nav-link" href="{{route('contact.us')}}">Contact</a>
                                 </li>
+
+                            </ul>
 
                             </ul>
                             </div>

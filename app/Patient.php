@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Operation;
 
 class Patient extends Model
 {
@@ -11,4 +12,11 @@ class Patient extends Model
         'name','email','phone_number','disease_type','gender'
 
     ]; 
+
+    public function operations()
+    {
+        return $this->belongsToMany('App\Patient','operation_id');
+    }
+
+
 }

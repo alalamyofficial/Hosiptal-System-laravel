@@ -91,7 +91,13 @@
 
                                 <li class="nav-item dropdown">
         
-                                    <a class="nav-link" href="Doctor.html">Services</a>
+                                    <a class="nav-link" href="{{route('all.services')}}">Services</a>
+
+                                </li>
+
+                                <li class="nav-item dropdown">
+        
+                                    <a class="nav-link" href="{{route('blog')}}">Blog</a>
 
                                 </li>
 

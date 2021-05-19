@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Operation;
 
 class Nurse extends Model
 {
@@ -40,4 +41,10 @@ class Nurse extends Model
         return $this->hasMany(BookAppointment::class);
 
     }
+    public function operations()
+    {
+        return $this->belongsToMany('App\Operation','operation_id');
+    }
+
+
 }

@@ -22,7 +22,26 @@
     <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/solid.min.css" integrity="sha512-jQqzj2vHVxA/yCojT8pVZjKGOe9UmoYvnOuM/2sQ110vxiajBU+4WkyRs1ODMmd4AfntwUEV4J+VfM6DkfjLRg==" crossorigin="anonymous" /> -->
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous"></script>
+    <!-- <script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script> -->
+
+    <script src="https://cdn.ckeditor.com/4.16.0/standard/ckeditor.js"></script>
+
+
+    <!-- <script type="text/javascript">
+    tinymce.init({
+        selector: '#mytextarea'
+    });
+    </script> -->
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('.ckeditor').ckeditor();
+        });
+    </script>
     
+    <!-- <script>
+            CKEDITOR.replace('mytextarea');
+    </script> -->
+
     <!-- @notifyCss -->
     <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.9.0/fullcalendar.js"></script> -->
 
@@ -159,7 +178,12 @@
 							</ul>                        
                         </li>
                         <li>
-                            <a href="schedule.html"><i class="fa fa-calendar-check-o"></i> <span>Doctor Schedule</span></a>
+                            <a><i class="fa fa-calendar-check-o"></i> <span>Doctor Schedule</span><span class="menu-arrow"></span></a>
+                            
+                            <ul style="display: none;">
+                                <li><a href="{{route('schedule.create')}}">Add Doctor Schedule</a></li>
+								<li><a href="{{route('schedule.show')}}">Doctors Schedule</a></li>
+							</ul>
                         </li>
                         <li>
                             <a><i class="fa fa-hospital-o"></i> <span>Departments</span> <span class="menu-arrow"></span> </a>
@@ -202,16 +226,18 @@
 						</li>
 
                         <li>
-                            <a href="schedule.html"><i class="far fa-heart"></i></i> <span>Operations</span></a>
-                        </li>
-
-                        <li class="submenu">
-                            <a href="#"><i class="fa fa-commenting-o"></i> <span> Blog</span> <span class="menu-arrow"></span></a>
+                            <a><i class="far fa-heart"></i></i> <span>Operations</span><span class="menu-arrow"></span></a>
                             <ul style="display: none;">
-                                <li><a href="blog.html">Blog</a></li>
-                                <li><a href="blog-details.html">Blog View</a></li>
-                                <li><a href="add-blog.html">Add Blog</a></li>
-                                <li><a href="edit-blog.html">Edit Blog</a></li>
+                                <li><a href="{{route('operation.create')}}">Add Operation</a></li>
+								<li><a href="{{route('operation.show')}}">Operations</a></li>
+							</ul>
+                        </li>
+                        
+                        <li class="submenu">
+                            <a><i class="fa fa-commenting-o"></i> <span> Blog</span> <span class="menu-arrow"></span></a>
+                            <ul style="display: none;">
+                                <li><a href="{{route('blog.create')}}">Add Blog</a></li>
+                                <li><a href="{{route('blog.show')}}">Blog</a></li>
                             </ul>
                         </li>
                         <li>
