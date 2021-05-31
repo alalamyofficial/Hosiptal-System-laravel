@@ -56,5 +56,16 @@ class MainController extends Controller
         return view('blog',compact('posts'));
 
     }
+
+    public function singleBlog($id){
+
+
+        // $mails  = Mail::findOrFail($id);
+        $posts  = Blog::where('id',$id)->get();
+
+
+        return view('single_blog',compact('posts'));
+
+    }
     
 }

@@ -15,6 +15,9 @@ use App\Notifications\ReservationNotification;
 use Notification;
 use Illuminate\Notifications\Notifiable;
 use App\Mail;
+use App\User;
+
+
 
 class BookAppointmentController extends Controller
 {
@@ -61,6 +64,8 @@ class BookAppointmentController extends Controller
     {
         $mynookappointment = BookAppointment::all();
 
+        $user = User::all();
+
         $this->validate($request,[
 
             'name' => 'required',
@@ -96,7 +101,10 @@ class BookAppointmentController extends Controller
           $mynookappointment->doctor_id = $request->doctor_id;
           $mynookappointment->user_id =  Auth::user()->id; 
 
-          Notification::send($mynookappointment , new ReservationNotification($request->name));
+          Notification::send($user , new ReservationNotification($request->name));
+
+          toast('Your Booking has been submited!','success');
+
 
           $mynookappointment->save();
 
@@ -146,9 +154,17 @@ class BookAppointmentController extends Controller
      * @param  \App\BookAppointment  $bookAppointment
      * @return \Illuminate\Http\Response
      */
-    public function destroy(BookAppointment $bookAppointment)
+    public function destroy(BookAppointment $bookAppointment,$id)
     {
-        //
+        $my = BookAppointment::findOrFail($id);
+
+        $my->destroy($id);
+
+        toast('Your Booking has been deleted!','success');
+
+
+        return redirect('reservation')->with($my,'my');
+
     }
 
     public function covid(){

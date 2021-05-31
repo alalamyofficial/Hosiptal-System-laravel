@@ -86,9 +86,14 @@ class PayrollController extends Controller
      * @param  \App\Payroll  $payroll
      * @return \Illuminate\Http\Response
      */
-    public function edit(Payroll $payroll)
+    public function edit(Payroll $payroll , $id)
     {
-        //
+        $payroll = Payroll::findOrFail($id);
+
+        $dash_settings = DashboardSettings::all();
+        $mails = Mail::all();
+
+        return view('admin.payroll.edit',compact('dash_settings','mails','payroll'));
     }
 
     /**
@@ -98,9 +103,33 @@ class PayrollController extends Controller
      * @param  \App\Payroll  $payroll
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Payroll $payroll)
+    public function update(Request $request, Payroll $payroll, $id)
     {
-        //
+        $this->validate($request,[
+
+            'name' =>'required',
+            'role' =>'required',
+            'salary' =>'required',
+
+        ]);
+
+        $update_payroll = [
+
+            "name" => $request->name,
+            "role" => $request->role,
+            "salary" => $request->salary,
+
+        ];
+
+        Payroll::whereId($id)->update($update_payroll);
+
+
+        Alert::success('Success', 'Payroll Updated Successfully !');
+
+
+        return redirect()->route('payroll.show');
+
+
     }
 
     /**

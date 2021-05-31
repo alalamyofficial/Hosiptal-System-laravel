@@ -2,7 +2,7 @@
 @section('content')
 
 
-<div class="content">
+			<div class="content">
                 <div class="row">
                     <div class="col-md-6 col-sm-6 col-lg-6 col-xl-3">
                         <div class="dash-widget">
@@ -45,27 +45,21 @@
 					<div class="col-12 col-md-6 col-lg-6 col-xl-6">
 						<div class="card">
 							<div class="card-body">
-								<div class="chart-title">
-									<h4>Patient Total</h4>
-									<span class="float-right"><i class="fa fa-caret-up" aria-hidden="true"></i> 15% Higher than Last Month</span>
-								</div>	
-								<canvas id="linegraph"></canvas>
+	
+								<!-- <canvas id="linegraph"></canvas> -->
+								{!! $chart1->html() !!}
+
+
 							</div>
 						</div>
 					</div>
 					<div class="col-12 col-md-6 col-lg-6 col-xl-6">
 						<div class="card">
 							<div class="card-body">
-								<div class="chart-title">
-									<h4>Patients In</h4>
-									<div class="float-right">
-										<ul class="chat-user-total">
-											<li><i class="fa fa-circle current-users" aria-hidden="true"></i>ICU</li>
-											<li><i class="fa fa-circle old-users" aria-hidden="true"></i> OPD</li>
-										</ul>
-									</div>
-								</div>	
-								<canvas id="bargraph"></canvas>
+	
+								<!-- <canvas id="bargraph"></canvas> -->
+								{!! $chart2->html() !!}
+
 							</div>
 						</div>
 					</div>
@@ -127,7 +121,7 @@
                                                 <a href="{{url($doctor->image)}}" title="John Doe"><img src="{{url($doctor->image)}}" alt="" class="w-40 rounded-circle"><span class="status online"></span></a>
                                             </div>
                                             <div class="contact-info">
-                                                <span class="contact-name text-ellipsis">{{$doctor->first_name}}{{$doctor->last_name}}</span>
+                                                <span class="contact-name text-ellipsis">{{$doctor->first_name}} {{$doctor->last_name}}</span>
                                                 <span class="contact-date">{{$doctor->email}}</span>
                                             </div>
                                         </div>
@@ -151,8 +145,8 @@
 								<div class="table-responsive">
 									<table class="table mb-0 new-patient-table">
 										<tbody>
-											<tr>
                                                 @foreach($patients as $patient)
+											<tr>
 												<td>
 													<h2>{{$patient->name}}</h2>
 												</td>
@@ -160,8 +154,8 @@
 												<td>{{$patient->phone_number}}</td>
 												<td><button class="btn btn-primary btn-primary-one float-right">{{$patient->disease_type}}</button></td>
 
-                                                @endforeach
 											</tr>
+                                                @endforeach
 
 										</tbody>
 									</table>
@@ -236,5 +230,8 @@
 				</div>
             </div>
 
-
+			{!! Charts::scripts() !!}
+			{!! $chart1->script() !!}
+			{!! $chart2->script() !!}
 @endsection
+

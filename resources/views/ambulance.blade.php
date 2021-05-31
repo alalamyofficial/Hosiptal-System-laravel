@@ -4,6 +4,7 @@
 
 <br><br>
 <div class="container">
+        <a href="{{route('ambulance.orders')}}" type="submit" class="btn btn-primary">View Ambulance Oders</a><br><br>
 
         <h2 class="text-center">We Will Immediately Reach At You At Anywhere</h2><br><br>
 
@@ -297,7 +298,7 @@
             </div>        <br>
 
 
-            <button type="submit" class="btn btn-primary">Book Ambulance</button>
+            <button type="submit" class="btn btn-primary">Book Ambulance</button><br><br>
         </form>
         
     </div>

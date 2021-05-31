@@ -19,6 +19,7 @@ class ReservationNotification extends Notification
     public function __construct($name)
     {
         $this->name = $name;
+        // $this->created_at = $created_at;
     }
 
     /**
@@ -56,7 +57,8 @@ class ReservationNotification extends Notification
     {
         return [
             
-            'name' => $this->name
+            'name' => $this->name,
+            // 'created_at' => $this->created_at
         ];
     }
 }

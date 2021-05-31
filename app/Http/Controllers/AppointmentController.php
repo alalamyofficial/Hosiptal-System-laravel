@@ -84,4 +84,73 @@ class AppointmentController extends Controller
 
 	}
 
+
+    public function edit(Appointment $appointment,$id)
+    {
+        $appointment = Appointment::findOrFail($id);
+
+        $dash_settings = DashboardSettings::all();
+        $mails = Mail::all();
+		$patients = Patient::all();
+        $doctors = Doctor::all();
+		$departments = Department::all();
+
+        return view('admin.appointment.edit',compact('appointment','dash_settings','mails','patients','doctors','departments'));
+    }
+
+
+    public function update(Request $request, Appointment $appointment , $id)
+    {
+        $this->validate($request,[
+
+			'patient_id'=>'required',
+			'doctor_id'=>'required',
+			'department_id'=>'required',
+			'start' => 'required',
+			'end' => 'required',
+			'patient_email' => 'required',
+			'patient_phone' => 'required',
+			'message' => 'required',
+			'age' => 'required',
+			'date' => 'required',
+        ]);
+
+        $update_appointments = [
+
+			"patient_id" => $request->patient_id,
+			"doctor_id" => $request->doctor_id,
+			"department_id" => $request->department_id,
+			"start" => $request->start,
+			"end" => $request->end,
+			"patient_email" => $request->patient_email,
+			"patient_phone" => $request->patient_phone,
+			"message" => $request->message,
+			"age" => $request->age,
+			"date" => $request->date,
+
+        ];
+
+
+
+        Appointment::whereId($id)->update($update_appointments);
+        
+        Alert::success('Success', 'Appointment Updated Successfully !');
+
+
+        return redirect()->route('appointment.show');
+
+
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  \App\Department  $department
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy(Department $department)
+    {
+        //
+    }
+
 }

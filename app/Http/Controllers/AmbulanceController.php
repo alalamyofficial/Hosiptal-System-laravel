@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use RealRashid\SweetAlert\Facades\Alert;
 use App\DashboardSettings;
 use App\Mail;
+use App\User;
 
 class AmbulanceController extends Controller
 {
@@ -38,6 +39,8 @@ class AmbulanceController extends Controller
      */
     public function store(Request $request)
     {
+        $user = User::all();
+
         $this->validate($request,[
 
             'name' => 'required',
@@ -62,6 +65,7 @@ class AmbulanceController extends Controller
         $ambulances->age = $request->age;  
         
         $ambulances->save();
+
 
         toast('Your Request as been submited!','success');
 
@@ -114,8 +118,24 @@ class AmbulanceController extends Controller
      * @param  \App\Ambulance  $ambulance
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Ambulance $ambulance)
+    public function destroy(Ambulance $ambulance,$id)
     {
-        //
+        $ambulance = Ambulance::findOrFail($id);
+        $dash_settings = DashboardSettings::all();
+        $mails = Mail::all();
+
+        return view('admin.ambulance.show',compact('ambulance','dash_settings','mails'));
+
+        $ambulance->destroy();
+
     }
+
+    public function orders(Request $request)
+    {
+        $userId = $request->user()->id;
+        $my_amb_reservations = Ambulance::where('user_id', $userId)->get();
+        return view('ambulance_order',compact('my_amb_reservations'));
+
+    }
+
 }

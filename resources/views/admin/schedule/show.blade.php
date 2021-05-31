@@ -7,7 +7,7 @@
                         <h4 class="page-title">Schedules</h4>
                     </div>
                     <div class="col-sm-8 col-9 text-right m-b-20">
-                        <a href="{{route('payroll.create')}}" class="btn btn btn-primary btn-rounded float-right"><i class="fa fa-plus"></i> Add Payroll</a>
+                        <a href="{{route('schedule.create')}}" class="btn btn btn-primary btn-rounded float-right"><i class="fa fa-plus"></i> Add Schedule</a>
                     </div>
                 </div>
 				<div class="row">
@@ -39,7 +39,7 @@
 										<td>{{$schedule->created_at->diffForHumans()}}</td>
 										<td class="text-right">
 											<div class="dropdown dropdown-action">
-												<a href="#" class="action-icon dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="fa fa-ellipsis-v"></i></a>
+												<a href="" class="action-icon dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="fa fa-ellipsis-v"></i></a>
 												<div class="dropdown-menu dropdown-menu-right">
 												<form action="" method="post">
 												@csrf

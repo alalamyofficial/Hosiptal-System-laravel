@@ -6,6 +6,10 @@ use App\Mail;
 use Illuminate\Http\Request;
 use RealRashid\SweetAlert\Facades\Alert;
 use App\DashboardSettings;
+use App\Notifications\Mails;
+use Notification;
+use Illuminate\Notifications\Notifiable;
+use App\User;
 
 class MailController extends Controller
 {
@@ -37,6 +41,9 @@ class MailController extends Controller
      */
     public function store(Request $request)
     {
+
+        $mail_noty = Mail::all();
+
         $this->validate($request,[
 
             'message' => 'required',
@@ -53,7 +60,11 @@ class MailController extends Controller
         $mails->email = $request->email;
         $mails->subject = $request->subject;
 
+        Notification::send($mail_noty , new Mails($request->name , $request->message));
+
         $mails->save();
+
+
 
         Alert::success('Success', 'Message Sent Successfully !');
 

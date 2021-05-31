@@ -9,6 +9,8 @@ use App\Doctor;
 use App\DashboardSettings;
 use App\Mail;
 use RealRashid\SweetAlert\Facades\Alert;
+use App\Patient;
+
 
 class DoctorScheduleController extends Controller
 {
@@ -101,9 +103,17 @@ class DoctorScheduleController extends Controller
      * @param  \App\DoctorSchedule  $doctorSchedule
      * @return \Illuminate\Http\Response
      */
-    public function edit(DoctorSchedule $doctorSchedule)
+    public function edit(DoctorSchedule $doctorSchedule ,$id)
     {
-        //
+        $schedule = DoctorSchedule::findOrFail($id);
+
+        $dash_settings = DashboardSettings::all();
+        $mails = Mail::all();
+		$patients = Patient::all();
+        $doctors = Doctor::all();
+		$departments = Department::all();
+
+        return view('admin.schedule.edit',compact('schedule','dash_settings','mails','patients','doctors','departments'));
     }
 
     /**
@@ -113,9 +123,42 @@ class DoctorScheduleController extends Controller
      * @param  \App\DoctorSchedule  $doctorSchedule
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, DoctorSchedule $doctorSchedule)
+    public function update(Request $request, DoctorSchedule $doctorSchedule,$id)
     {
-        //
+        $this->validate($request,[
+
+            'doctor_id',
+            'department_id', 
+            'days_work',
+            'holiday',
+            'start_id',
+            'end_id',
+    
+
+        ]);
+
+        
+        $update_schedules = [
+
+			"doctor_id" => $request->doctor_id,
+			"department_id" => $request->department_id,
+			"start_id" => $request->start_id,
+			"end_id" => $request->end_id,
+			"days_work" => $request->days_work,
+			"holiday" => $request->holiday,
+
+
+        ];
+
+
+
+        DoctorSchedule::whereId($id)->update($update_schedules);
+        
+        Alert::success('Success', 'Doctor Schedule Updated Successfully !');
+
+
+        return redirect()->route('schedule.show');
+
     }
 
     /**

@@ -26,13 +26,13 @@
 
                     <div class="col-lg-8 offset-lg-2">
 
-                        <form action="{{route('payroll.store')}}" method="POST" enctype="multipart/form-data">
+                        <form action="{{route('payroll.update',$payroll->id)}}" method="POST" enctype="multipart/form-data">
                         @csrf
                             <div class="row">
                                 <div class="col-sm-6">
                                     <div class="form-group">
                                         <label>Name<span class="text-danger">*</span></label>
-                                        <input class="form-control" type="text" name="name">
+                                        <input class="form-control" type="text" name="name" value="{{$payroll->name}}">
                                     </div>
                                 </div>
                          
@@ -58,7 +58,7 @@
                                 <div class="col-sm-6 col-md-6 col-lg-6">
                                     <div class="form-group">
                                         <label>Salary<span class="text-danger">*</span></label>
-                                        <input class="form-control" type="number" name="salary">
+                                        <input class="form-control" type="number" name="salary" value="{{$payroll->salary}}">
                                     </div>
                                 </div>
 
@@ -70,7 +70,7 @@
        
 
                             <div class="m-t-20 text-center">
-                                <button class="btn btn-primary submit-btn">Update Payroll</button>
+                                <button class="btn btn-success submit-btn">Edit Payroll</button>
                             </div>
 
                         </form>

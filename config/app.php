@@ -164,6 +164,9 @@ return [
         Stevebauman\Location\LocationServiceProvider::class,
         PragmaRX\Tracker\Vendor\Laravel\ServiceProvider::class,
         Shetabit\Visitor\Provider\VisitorServiceProvider::class,
+        Yajra\Disqus\DisqusServiceProvider::class,
+        Cyrildewit\PageVisitsCounter\PageVisitsCounterServiceProvider::class,
+        ConsoleTVs\Charts\ChartsServiceProvider::class,
 
 
     ],
@@ -217,6 +220,7 @@ return [
         'Location' => 'Stevebauman\Location\Facades\Location',
         'Tracker' => 'PragmaRX\Tracker\Vendor\Laravel\Facade',
         'Visitor' => Shetabit\Visitor\Facade\Visitor::class,
+        'Charts' => ConsoleTVs\Charts\Facades\Charts::class,
 
 
 

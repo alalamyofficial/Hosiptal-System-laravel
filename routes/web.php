@@ -53,7 +53,7 @@ Route::group(['prefix' => 'admin'], function () {
     Route::post('doctor/schedule/store','DoctorScheduleController@store')->name('schedule.store');
     Route::get('doctor/schedule/show','DoctorScheduleController@index')->name('schedule.show');
     Route::get('doctor/schedule/edit/{id}','DoctorScheduleController@edit')->name('schedule.edit');
-    Route::patch('doctor/schedule/update/{id}','DoctorScheduleController@update')->name('schedule.update');
+    Route::post('doctor/schedule/update/{id}','DoctorScheduleController@update')->name('schedule.update');
 
     //employees
     Route::get('employee/create','EmployeeController@create')->name('employee.create');
@@ -106,8 +106,13 @@ Route::group(['prefix' => 'admin'], function () {
     Route::get('appointment/create','AppointmentController@create')->name('appointment.create');
     Route::post('appointment/create','AppointmentController@store')->name('appointment.store');
     Route::get('appointment/show','AppointmentController@index')->name('appointment.show');
-    
+    Route::get('appointment/edit/{id}','AppointmentController@edit')->name('appointment.edit');
+    Route::post('appointment/update/{id}','AppointmentController@update')->name('appointment.update');
+
+    //ambulance
     Route::get('ambulance','AmbulanceController@show')->name('ambulance.show');
+    Route::post('ambulance','AmbulanceController@destroy')->name('ambulance.destroy');
+    Route::get('ambulance/orders','AmbulanceController@orders')->name('ambulance.orders');
     
     //admin reservation
     Route::get('reservation','AdminController@reservation')->name('admin.reservation');
@@ -121,7 +126,8 @@ Route::group(['prefix' => 'admin'], function () {
     Route::get('add/payroll','PayrollController@create')->name('payroll.create');
     Route::post('add/payroll','PayrollController@store')->name('payroll.store');
     Route::get('payrolls','PayrollController@index')->name('payroll.show');
-
+    Route::get('payroll/edit/{id}','PayrollController@edit')->name('payroll.edit');
+    Route::post('payroll/update/{id}','PayrollController@update')->name('payroll.update');
 
     //blog
     Route::get('blog/create','BlogController@create')->name('blog.create');
@@ -144,10 +150,13 @@ Route::get('user/reservation','BookAppointmentController@index')->name('user.res
 //for users
 Route::get('user/appointment','BookAppointmentController@create')->name('user.appointment')->middleware('auth');
 Route::post('user/appointment','BookAppointmentController@store')->name('store.appointment')->middleware('auth');
+Route::get('user/appointment/delete/{id}','BookAppointmentController@destroy')->name('appointment.delete')->middleware('auth');
+
 
 //ambulance
 Route::get('user/ambulance','AmbulanceController@create')->name('ambulance.create')->middleware('auth');
 Route::post('user/ambulance','AmbulanceController@store')->name('ambulance.store')->middleware('auth');
+Route::post('user/ambulance/destroy','AmbulanceController@destroy')->name('ambulance.destroy')->middleware('auth');
 
 
 
@@ -180,4 +189,5 @@ Route::get('/geoip','TestController@test');
 
 //main blog
 Route::get('blog','MainController@publicBlog')->name('blog');
+Route::get('blog/{id}','MainController@singleBlog')->name('blog.post');
 // Route::get('blog','BlogController@publicBlog')->name('blog');

@@ -31,7 +31,8 @@
 														<li><a href="#."><i class="fa fa-calendar"></i> <span>{{$post->created_at->diffForHumans()}}</span></a></li>
 													</ul>
 												</div>
-												<div class="post-right"><a href="#."><i class="fa fa-heart-o"></i>21</a> <a href="#."><i class="fa fa-eye"></i>8</a> <a href="#."><i class="fa fa-comment-o"></i>17</a></div>
+												<div class="post-right"><a href="#."><a href="#."><i class="fa fa-eye"></i>8</a></div>
+
 											</div>
 										</div>
 									</div>
