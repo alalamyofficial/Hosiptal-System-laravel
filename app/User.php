@@ -16,13 +16,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',    
-
-        //for favourite
-            // 'title',
-            // 'description',
-            // 'icon',
- 
+        'name', 'email', 'password',   
     ];
 
     public $quantity;
@@ -37,13 +31,21 @@ class User extends Authenticatable
 
     public function appointments(){
 
-        return $this->hasMany(BookAppointment::class);
+        return $this->hasMany(BookAppointment::class,'user_id');
 
     }
 
     public function ambulances(){
 
-        return $this->hasMany(Ambulance::class);
+        return $this->hasMany(Ambulance::class,'user_id');
 
     }
+
+    
+    public function vaccines(){
+
+        return $this->hasMany(Vaccine::class,'user_id');
+
+    }
+
 }

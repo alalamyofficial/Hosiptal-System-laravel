@@ -262,8 +262,15 @@ class DoctorController extends Controller
      * @param  \App\Doctor  $doctor
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Doctor $doctor)
+    public function destroy(Doctor $doctor,$id)
     {
-        //
+        $doctor = Doctor::findOrFail($id);
+
+        $doctor->destroy($id);
+
+        Alert::error('Success', 'Dcotor Updated Successfully !');
+
+
+        return redirect()->route('doctor.show');
     }
 }

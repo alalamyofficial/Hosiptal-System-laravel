@@ -19,6 +19,8 @@ class Employee extends Model
         'age',
         'role',
         'bio',
+        'start',
+        'end',
 
     ];
 

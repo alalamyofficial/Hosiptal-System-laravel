@@ -10,4 +10,6 @@ class Admin extends Model
 
     protected $guard = 'admin';
 
+    protected $fillable = ['status'];
+
 }

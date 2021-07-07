@@ -138,8 +138,16 @@ class PayrollController extends Controller
      * @param  \App\Payroll  $payroll
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Payroll $payroll)
+    public function destroy(Payroll $payroll,$id)
     {
-        //
+        $payroll = Payroll::findOrFail($id);
+
+        $payroll->destroy($id);
+
+        Alert::error('Success', 'Payroll Deleted Successfully !');
+
+
+        return redirect()->route('payroll.show');
+
     }
 }

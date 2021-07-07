@@ -26,45 +26,62 @@
 
                     <div class="col-lg-8 offset-lg-2">
 
-                        <form action="{{route('operation.store')}}" method="POST" enctype="multipart/form-data">
+                        <form id="formId" action="{{route('operation.store')}}" method="POST" enctype="multipart/form-data">
                         @csrf
                             <div class="row">
                          
-                                <div class="col-sm-6 col-md-6 col-lg-4">
+                                <div class="col-sm-12 col-md-12 col-lg-12">
                                     <Label>Doctors</Label>
-                                    <select class="form-control" id="exampleFormControlSelect1" style="height: 100px" name="doctors[]" multiple>
-                                        @foreach ($doctors as $doctor)
-                                            <option value="{{$doctor->id}}">{{$doctor->first_name}} {{$doctor->last_name}}</option>
-                                        @endforeach
-                                    </select>
+                                    <div class="form-group">
+                                        <input type="text" placeholder="Enter Doctors Operations" name="doctor" data-role="tagsinput" class="form-control">
+                                    </div>
 
-                                </div>
+                                </div><br><br>
 
                          
-                                <div class="col-sm-6 col-md-6 col-lg-4">
+                                <div class="col-sm-12 col-md-12 col-lg-12">
                                     <Label>Nurses</Label>
-                                    <select class="form-control" id="exampleFormControlSelect1" style="height: 100px" name="nurses[]" multiple>
-                                        @foreach ($nurses as $nurse)
-                                            <option value="{{$nurse->id}}">{{$nurse->first_name}} {{$nurse->last_name}}</option>
-                                        @endforeach
-                                    </select>
 
-                                </div>
+                                    <div class="form-group">
+                                        <input type="text" placeholder="Enter Nurses Operations" name="nurse" data-role="tagsinput" class="form-control">
+                                    </div>
 
-                                <div class="col-sm-6 col-md-6 col-lg-4">
+                                </div><br>
+
+                                <div class="col-sm-12 col-md-12 col-lg-12">
                                     <Label>Patients</Label>
-                                    <select class="form-control" id="exampleFormControlSelect1" style="height: 100px" name="patients[]" multiple>
-                                        @foreach ($patients as $patient)
-                                            <option value="{{$patient->id}}">{{$patient->name}}</option>
-                                        @endforeach
-                                    </select>
+                                    <div class="form-group">
+                                        <input type="text" placeholder="Enter Patients Operations" name="patient" data-role="tagsinput" class="form-control">
+                                    </div>
 
-                                </div>
+                                </div><br>
 
+                                <div class="col-sm-12 col-md-12 col-lg-12">
+                                    <div class="form-group">
+                                        <label>Department</label>
+                                        <div class="form-group">
+                                            <select name="department_id" class="form-control select">
+                                                <option value="">Select</option>
+                                                @foreach($departments as $department)
 
-                    </div><br><br>
+                                                    <option value="{{$department->id}}">{{$department->name}}</option>
+
+                                                @endforeach
+                                            </select>
+                                        
+                                        </div>
+                                    </div>
+                                </div><br>
+
+                                <div class="col-sm-12 col-md-12 col-lg-12">
+                                    <Label>Type of Operation</Label>
+                                    <div class="form-group">
+                                        <input type="text" placeholder="Enter Type of Operations" name="operation_type" class="form-control">
+                                    </div>
+
+                                </div><br>
                             
-                    <div class="col-sm-6 col-md-6 col-lg-6">
+                            <div class="col-sm-12 col-md-12 col-lg-12">
                                     <div class="form-group">
                                         <label>Country</label>
                                         <select class="form-control select" name="country">
@@ -314,41 +331,45 @@
                                     </div>
                                 </div>
 
-                                <div class="col-sm-6 col-md-6 col-lg-6">
+                                <div class="col-sm-12 col-md-12 col-lg-12">
+                                    <div class="form-group">
+                                        <label>City</label>
+                                        <input type="text" class="form-control" name="city">
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-12 col-md-12 col-lg-12">
                                     <div class="form-group">
                                         <label>Address</label>
                                         <input type="text" class="form-control" name="address">
                                     </div>
                                 </div>
 
-                                <div class="col-sm-6 col-md-6 col-lg-6">
+                                <div class="col-sm-12 col-md-12 col-lg-12">
                                     <div class="form-group">
                                         <label>Price</label>
                                         <input type="number" class="form-control" name="price">
                                     </div>
                                 </div>
 
-                                <div class="col-sm-6 col-md-6 col-lg-6">
+                                <div class="col-md-12">
                                     <div class="form-group">
-                                        <label>City</label>
-                                        <input type="text" class="form-control" name="city">
+                                        <label>Start Time</label>
+                                        <div class="time-icon">
+                                            <input type="time" class="form-control" name="start" id="datetimepicker3">
+                                        </div>
                                     </div>
                                 </div>
-                                <div class="col-lg-6">
 
-                                    <label for="appt">Start:</label>
-
-                                    <input type="time" id="appt" name="start" 
-                                    min="09:00" max="18:00" required value="{{$doctor->start}}">
-                                </div><br>
-
-                                <div class="col-lg-6">
-
-                                    <label for="appt">End:</label>
-
-                                    <input type="time" id="appt" name="end"
-                                    min="09:00" max="18:00" required value="{{$doctor->end}}">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label>End Time</label>
+                                        <div class="time-icon">
+                                            <input type="time" class="form-control" name="end" id="datetimepicker3">
+                                        </div>
+                                    </div>
                                 </div>
+
 
                             <br><br>            
 
@@ -359,11 +380,24 @@
                             </div>
 
                         </form>
+                    </div><br>
                 </div>
 
             </div>   
 
 
+            <!-- <script>
+            
+            $(document).ready(function() {
+                $(window).keydown(function(event){
+                    if((event.keyCode == 13) && ($(event.target)[0]!=$("input")[0])) {
+                        event.preventDefault();
+                        return false;
+                    }
+                });
+            });
+
+            </script> -->
 
 
 @endsection

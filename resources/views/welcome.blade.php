@@ -25,34 +25,32 @@
     <link rel="stylesheet" href="{{asset('assets/css/slick.css')}}">
     <!-- style CSS -->
     <link rel="stylesheet" href="{{asset('assets/css/style.css')}}">
-    
+
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous" />
-    
-    
+
+
 
 </head>
 
-    <style>
-    
-    #messageArea{
+<style>
+    #messageArea {
 
         background-image: url("https://i.pinimg.com/originals/8f/64/ad/8f64ad76980a7e3b35d084a6d67c96c5.jpg");
 
     }
 
-    .fullimg{
+    .fullimg {
 
         position: fixed;
         height: 100%;
-        width:100%;
+        width: 100%;
 
     }
-
-    </style>
+</style>
 
 <body>
 
-<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/botman-web-widget@0/build/assets/css/chat.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/botman-web-widget@0/build/assets/css/chat.min.css">
 
     <img class="fullimg" src="https://i.pinimg.com/originals/8f/64/ad/8f64ad76980a7e3b35d084a6d67c96c5.jpg" alt="">
 
@@ -62,22 +60,19 @@
             <div class="row align-items-center">
                 <div class="col-lg-12">
                     <nav class="navbar navbar-expand-lg navbar-light">
-                    @foreach($settings as $setting)
-                        <a class="navbar-brand" href="/"> 
-                        
-                        <img src="{{asset('assets/img/logo.png')}}" alt="logo">
-                        <!-- {{$setting->website_name}}  -->
-                        
+                        @foreach($settings as $setting)
+                        <a class="navbar-brand" href="/">
+
+                            <img src="{{asset('assets/img/logo.png')}}" alt="logo">
+                            <!-- {{$setting->website_name}}  -->
+
                         </a>
-                    @endforeach
-                        <button class="navbar-toggler" type="button" data-toggle="collapse"
-                            data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
-                            aria-expanded="false" aria-label="Toggle navigation">
+                        @endforeach
+                        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                             <span class="navbar-toggler-icon"></span>
                         </button>
 
-                        <div class="collapse navbar-collapse main-menu-item justify-content-end"
-                            id="navbarSupportedContent">
+                        <div class="collapse navbar-collapse main-menu-item justify-content-end" id="navbarSupportedContent">
                             <ul class="navbar-nav align-items-center">
                                 <li class="nav-item active">
                                     <a class="nav-link" href="/">Home</a>
@@ -85,18 +80,23 @@
                                 <li class="nav-item">
                                     <a class="nav-link" href="{{route('about')}}">about</a>
                                 </li>
+
                                 <li class="nav-item">
                                     <a class="nav-link" href="{{route('all.doctors')}}">Doctors</a>
                                 </li>
 
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{route('all.drugs')}}">Drugs</a>
+                                </li>
+
                                 <li class="nav-item dropdown">
-        
+
                                     <a class="nav-link" href="{{route('all.services')}}">Services</a>
 
                                 </li>
 
                                 <li class="nav-item dropdown">
-        
+
                                     <a class="nav-link" href="{{route('blog')}}">Blog</a>
 
                                 </li>
@@ -166,13 +166,14 @@
                 </div>
                 <div class="col-lg-8 col-md-8">
                     <div class="feature_item">
+                        @if(count($services) > 0)
                         <div class="row">
                             <div class="col-lg-6 col-sm-6">
-                            @foreach($services as $service)
+                                @foreach($services as $service)
                                 <div class="single_feature">
                                     <div class="single_feature_part">
-                                        <span class=""> 
-                                        <i class="<?php echo $service->icon;?>" style="width:50px"></i> 
+                                        <span class="">
+                                            <i class="<?php echo $service->icon; ?>" style="width:50px"></i>
                                         </span>
                                         <h4>{{$service->title}}</h4>
                                         <p>{{\Illuminate\Support\Str::limit(strip_tags($service->description),40)}}</p>
@@ -182,6 +183,11 @@
                             @endforeach
                         </div>
                     </div>
+                    @else
+                    <center>
+                        <h3>No Services found</h3>
+                    </center>
+                    @endif
                 </div>
             </div>
         </div>
@@ -298,23 +304,7 @@
     </section>
     <!--::review_part end::-->
 
-    <!--::regervation_part start::-->
-    <section class="regervation_part">
-        <div class="container">
-            <div class="row align-items-center regervation_content">
-                <div class="col-lg-7 col-md-6">
-                    <div class="regervation_part_iner">
-
-                        <iframe src="{{asset('assets/videos/flat.mp4')}}" frameborder="0" width="1000" height="415">
-                        
-                        </iframe>
-
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section><br><br>
-    <!--::regervation_part end::-->
+    <br><br>
 
     <!--::doctor_part start::-->
     <section class="doctor_part section_padding">
@@ -417,8 +407,7 @@
                     <div class="intro_video_iner text-center">
                         <h2>View Our History</h2>
                         <div class="intro_video_icon">
-                            <a id="play-video_1" class="video-play-button popup-youtube"
-                                href="https://www.youtube.com/watch?v=pBFQdxA-apI">
+                            <a id="play-video_1" class="video-play-button popup-youtube" href="https://www.youtube.com/watch?v=pBFQdxA-apI">
                                 <span class="ti-control-play"></span>
                             </a>
                         </div>
@@ -436,14 +425,11 @@
             <div class="container">
                 <div class="row">
                     <div class="col-xl-2 col-sm-4 mb-4 mb-xl-0 single-footer-widget">
-                        <h4>Services Link</h4>
+                        <h4>Departments</h4>
                         <ul>
-                            <li><a href="#">Eye treatment</a></li>
-                            <li><a href="#">Skin Surgery</a></li>
-                            <li><a href="#">Diagnosis clinic</a></li>
-                            <li><a href="#"> Dental care</a></li>
-                            <li><a href="#">Neurology service</a></li>
-                            <li><a href="#">Plastic surgery</a></li>
+                            @foreach($departments as $department)
+                            <li><a href="#">{{$department->name}}</a></li>
+                            @endforeach
                         </ul>
                     </div>
                     <div class="col-xl-2 col-sm-4 mb-4 mb-xl-0 single-footer-widget">
@@ -457,41 +443,17 @@
                         </ul>
                     </div>
 
-                    <div class="col-xl-2 col-sm-4 mb-4 mb-xl-0 single-footer-widget">
-                        <h4>Explore</h4>
-                        <ul>
-                            <li><a href="#">In the community</a></li>
-                            <li><a href="#">IU health foundation</a></li>
-                            <li><a href="#">Family support </a></li>
-                            <li><a href="#">Business solution</a></li>
-                            <li><a href="#">Community clinic</a></li>
-                        </ul>
-                    </div>
-                    <div class="col-xl-2 col-sm-4 mb-4 mb-xl-0 single-footer-widget">
-                        <h4>Resources</h4>
-                        <ul>
-                            <li><a href="#">Lights were season</a></li>
-                            <li><a href="#"> Their is let wherein</a></li>
-                            <li><a href="#">which given over</a></li>
-                            <li><a href="#">Without given She</a></li>
-                            <li><a href="#">Isn two signs think</a></li>
-                        </ul>
-                    </div>
-                    <div class="col-xl-4 col-sm-8 col-md-8 mb-4 mb-xl-0 single-footer-widget">
+
+                    <div class="col-xl-8 col-sm-8 col-md-8 mb-4 mb-xl-0 single-footer-widget">
                         <h4>Newsletter</h4>
                         <p>Seed good winged wherein which night multiply
                             midst does not fruitful</p>
                         <div class="form-wrap" id="mc_embed_signup">
-                            <form target="_blank"
-                                action="https://spondonit.us12.list-manage.com/subscribe/post?u=1462626880ade1ac87bd9c93a&amp;id=92a4423d01"
-                                method="get" class="form-inline">
-                                <input class="form-control" name="EMAIL" placeholder="Your Email Address"
-                                    onfocus="this.placeholder = ''" onblur="this.placeholder = 'Your Email Address '"
-                                    required="" type="email">
+                            <form target="_blank" action="https://spondonit.us12.list-manage.com/subscribe/post?u=1462626880ade1ac87bd9c93a&amp;id=92a4423d01" method="get" class="form-inline">
+                                <input class="form-control" name="EMAIL" placeholder="Your Email Address" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Your Email Address '" required="" type="email">
                                 <button class="click-btn btn btn-default text-uppercase">subscribe</button>
                                 <div style="position: absolute; left: -5000px;">
-                                    <input name="b_36c4fd991d266f23781ded980_aefe40901a" tabindex="-1" value=""
-                                        type="text">
+                                    <input name="b_36c4fd991d266f23781ded980_aefe40901a" tabindex="-1" value="" type="text">
                                 </div>
 
                                 <div class="info"></div>
@@ -505,9 +467,11 @@
         <div class="copyright_part">
             <div class="container">
                 <div class="row align-items-center">
-                    <p class="footer-text m-0 col-lg-8 col-md-12"><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-                    Copyright &copy; All rights reserved | This template is made with by Mohamed Alalamey
-<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></p>
+                    <p class="footer-text m-0 col-lg-8 col-md-12">
+                        <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                        Copyright &copy; All rights reserved | This template is made with by Mohamed Alalamey
+                        <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                    </p>
                     <div class="col-lg-4 col-md-12 text-center text-lg-right footer-social">
                         <a href="#"><i class="ti-facebook"></i></a>
                         <a href="#"> <i class="ti-twitter"></i> </a>
@@ -524,49 +488,47 @@
     <!-- jquery plugins here-->
 
     <script>
-	    var botmanWidget = {
-	        aboutText: 'ssdsd',
-	        introMessage: "✋ Hi! I'm Mr Bot Can I Help You",
+        var botmanWidget = {
+            aboutText: 'ssdsd',
+            introMessage: "✋ Hi! I'm Mr Bot Can I Help You",
             bubbleBackground: '#F24F2D',
             title: 'DoctorBot'
-	    };
+        };
     </script>
 
     <script>
-    
-    var bg = document.getElementById('messageArea');
+        var bg = document.getElementById('messageArea');
 
-    document.body.style.backgroundColor = "none";
-    
+        document.body.style.backgroundColor = "none";
     </script>
-  
+
     <script src='https://cdn.jsdelivr.net/npm/botman-web-widget@0/build/js/widget.js'></script>
-    <script src="js/jquery-1.12.1.min.js"></script>
+    <script src="{{asset('assets/js/jquery-1.12.1.min.js')}}"></script>
     <!-- popper js -->
-    <script src="js/popper.min.js"></script>
+    <script src="{{asset('assets/js/popper.min.js')}}"></script>
     <!-- bootstrap js -->
-    <script src="js/bootstrap.min.js"></script>
+    <script src="{{asset('assets/js/bootstrap.min.js')}}"></script>
     <!-- easing js -->
-    <script src="js/jquery.magnific-popup.js"></script>
+    <script src="{{asset('assets/js/jquery.magnific-popup.js')}}"></script>
     <!-- swiper js -->
-    <script src="js/swiper.min.js"></script>
+    <script src="{{asset('assets/js/swiper.min.js')}}"></script>
     <!-- swiper js -->
-    <script src="js/masonry.pkgd.js"></script>
+    <script src="{{asset('assets/js/masonry.pkgd.js')}}"></script>
     <!-- particles js -->
-    <script src="js/owl.carousel.min.js"></script>
-    <script src="js/jquery.nice-select.min.js"></script>
+    <script src="{{asset('assets/js/owl.carousel.min.js')}}"></script>
+    <script src="{{asset('assets/js/jquery.nice-select.min.js')}}"></script>
     <!-- swiper js -->
-    <script src="js/slick.min.js"></script>
-    <script src="js/jquery.counterup.min.js"></script>
-    <script src="js/waypoints.min.js"></script>
+    <script src="{{asset('assets/js/slick.min.js')}}"></script>
+    <script src="{{asset('assets/js/jquery.counterup.min.js')}}"></script>
+    <script src="{{asset('assets/js/waypoints.min.js')}}"></script>
     <!-- contact js -->
-    <script src="js/jquery.ajaxchimp.min.js"></script>
-    <script src="js/jquery.form.js"></script>
-    <script src="js/jquery.validate.min.js"></script>
-    <script src="js/mail-script.js"></script>
-    <script src="js/contact.js"></script>
+    <script src="{{asset('assets/js/jquery.ajaxchimp.min.js')}}"></script>
+    <script src="{{asset('assets/js/jquery.form.js')}}"></script>
+    <script src="{{asset('assets/js/jquery.validate.min.js')}}"></script>
+    <script src="{{asset('assets/js/mail-script.js')}}"></script>
+    <script src="{{asset('assets/js/contact.js')}}"></script>
     <!-- custom js -->
-    <script src="js/custom.js"></script>
+    <script src="{{asset('assets/js/custom.js')}}"></script>
 </body>
 
 </html>

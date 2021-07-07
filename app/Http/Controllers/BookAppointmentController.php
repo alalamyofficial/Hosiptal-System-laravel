@@ -32,10 +32,10 @@ class BookAppointmentController extends Controller
 
         $departments = Department::all();
         $doctors = Doctor::all();
-        $myreservation = BookAppointment::where('user_id', $userId)->get();
+        $myreservation = BookAppointment::where('user_id', $userId)->latest()->get();
         $mails = Mail::all();
 
-        return view('reservation',compact('doctors','myreservation','mails'));
+        return view('user.reservation',compact('doctors','myreservation','mails'));
 
     }
 
@@ -51,7 +51,7 @@ class BookAppointmentController extends Controller
         $doctors = Doctor::all();
         $mails = Mail::all();
 
-        return view('book_appointment',compact('departments','doctors','mails'));
+        return view('user.book_appointment',compact('departments','doctors','mails'));
     }
 
     /**
@@ -78,9 +78,8 @@ class BookAppointmentController extends Controller
             'city' => 'required',
             'zip_code' => 'required',
             'email' => 'required',
-            'appointment' => 'required',
-            'start' => 'required',
             'doctor_id' => 'required',
+
 
         ]);
 
@@ -96,10 +95,11 @@ class BookAppointmentController extends Controller
           $mynookappointment->city = $request->city;
           $mynookappointment->zip_code = $request->zip_code;
           $mynookappointment->email = $request->email;
-          $mynookappointment->appointment = $request->appointment;
-          $mynookappointment->start = $request->start;
           $mynookappointment->doctor_id = $request->doctor_id;
           $mynookappointment->user_id =  Auth::user()->id; 
+
+          $mynookappointment->status = false;
+
 
           Notification::send($user , new ReservationNotification($request->name));
 
@@ -163,20 +163,20 @@ class BookAppointmentController extends Controller
         toast('Your Booking has been deleted!','success');
 
 
-        return redirect('reservation')->with($my,'my');
+        return view('user.reservation')->with($my,'my');
 
     }
 
     public function covid(){
 
-        return view('covid');
+        return view('user.covid');
 
     }
 
     public function doctors(){
 
         $doctors = Doctor::all();
-        return view('doctors',compact('doctors'));
+        return view('user.doctors',compact('doctors'));
 
     }
 

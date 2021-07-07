@@ -56,6 +56,6 @@ class Doctor extends Model
 
     public function operations()
     {
-        return $this->belongsToMany('App\Operation');
+        return $this->belongsToMany('App\Operation','doctor_id');
     }
 }

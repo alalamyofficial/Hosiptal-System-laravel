@@ -29,8 +29,16 @@
                                         <label>Name <span class="text-danger">*</span></label>
                                         <input class="form-control" type="text" name="name" value="{{$department->name}}">
                                     </div>
-                                </div><br><br>
-                
+                                </div><br>
+
+                                <div class="col-sm-12">
+                                    <div class="form-group">
+                                        <label>Short Biography</label>
+                                        <textarea style="height:400px" class="ckeditor form-control" rows="3" id="mytextarea" cols="60" name="description">{{$department->description}}</textarea>
+                                    </div>
+                                </div>    
+                                <br><br>
+                            
                             <div class="m-t-20 text-center">
                                 <button class="btn btn-success submit-btn">Update Department</button>
                             </div>

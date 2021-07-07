@@ -8,6 +8,7 @@ use RealRashid\SweetAlert\Facades\Alert;
 use App\DashboardSettings;
 use App\Mail;
 use App\User;
+use Auth;
 
 class AmbulanceController extends Controller
 {
@@ -28,7 +29,7 @@ class AmbulanceController extends Controller
      */
     public function create()
     {
-        return view('ambulance');
+        return view('user.ambulance.ambulance');
     }
 
     /**
@@ -63,13 +64,14 @@ class AmbulanceController extends Controller
         $ambulances->city = $request->city;    
         $ambulances->gender = $request->gender;  
         $ambulances->age = $request->age;  
-        
+        $ambulances->user_id =  Auth::user()->id; 
+
         $ambulances->save();
 
 
-        toast('Your Request as been submited!','success');
+        toast('Your Order has been submited!','success');
 
-        return redirect()->route('home');
+        return redirect()->route('ambulance.orders');
 
     }
 
@@ -120,21 +122,27 @@ class AmbulanceController extends Controller
      */
     public function destroy(Ambulance $ambulance,$id)
     {
-        $ambulance = Ambulance::findOrFail($id);
+        $ambulances = Ambulance::findOrFail($id);
+
         $dash_settings = DashboardSettings::all();
+
         $mails = Mail::all();
 
-        return view('admin.ambulance.show',compact('ambulance','dash_settings','mails'));
+        $ambulances->destroy($id);
 
-        $ambulance->destroy();
+        toast('Your Order has been Deleted!','success');
+
+
+        return view('user.home',compact('ambulances','dash_settings','mails'));
+
 
     }
 
     public function orders(Request $request)
     {
         $userId = $request->user()->id;
-        $my_amb_reservations = Ambulance::where('user_id', $userId)->get();
-        return view('ambulance_order',compact('my_amb_reservations'));
+        $ambulances = Ambulance::where('id', $userId)->get();
+        return view('user.ambulance.ambulance_order',compact('ambulances'));
 
     }
 

@@ -4,10 +4,10 @@
 <div class="content">
                 <div class="row">
                     <div class="col-sm-4 col-3">
-                        <h4 class="page-title">Schedules</h4>
+                        <h4 class="page-title">Operations</h4>
                     </div>
                     <div class="col-sm-8 col-9 text-right m-b-20">
-                        <a href="{{route('payroll.create')}}" class="btn btn btn-primary btn-rounded float-right"><i class="fa fa-plus"></i> Add Payroll</a>
+                        <a href="{{route('operation.create')}}" class="btn btn btn-primary btn-rounded float-right"><i class="fa fa-plus"></i> Add Operation</a>
                     </div>
                 </div>
 				<div class="row">
@@ -16,10 +16,15 @@
 							<table class="table table-border table-striped custom-table datatable mb-0">
 								<thead>
 									<tr>
-										<th>Doctor Name</th>
+										<th>Doctors</th>
+										<th>Nurses</th>
+										<th>Patients</th>
 										<th>Department</th>
-										<th>Days Work</th>
-										<th>Holidays</th>
+										<th>Operation Type</th>
+										<th>Country</th>
+										<th>City</th>
+										<th>Address</th>
+										<th>Price</th>
 										<th>Start</th>
 										<th>End</th>
 										<th>Created At</th>
@@ -27,25 +32,54 @@
 									</tr>
 								</thead>
 								<tbody>
-                                        @foreach($schedules as $schedule)
+                                        @foreach($operations as $operation)
 									<tr>
 
-										<td>{{$schedule->doctors->first_name}} {{$schedule->doctors->last_name}}</td>
-										<td>{{$schedule->departments->name}}</td>
-										<td>{{$schedule->days_work}}</td>
-										<td>{{$schedule->holiday}}</td>
-										<td>{{$schedule->start_id}}</td>
-										<td>{{$schedule->end_id}}</td>
-										<td>{{$schedule->created_at->diffForHumans()}}</td>
+										<td>	
+											@foreach (explode(',', $operation->doctor) as $dc)
+												<h4>
+													<span class="badge badge-success">{{$dc}}</span>
+												</h4>
+											@endforeach 
+										</td>
+
+										<td>	
+											@foreach (explode(',', $operation->nurse) as $nc)
+												<h4>
+													<span class="badge badge-danger">{{$nc}}</span>
+												</h4>
+											@endforeach 
+										</td>										
+
+										<td>
+											<h4>
+												<span class="badge badge-warning">{{$operation->patient}}</span>
+											</h4>
+										</td>
+										<td>{{$operation->departments->name}}</td>
+										<td>{{$operation->operation_type}}</td>
+										<td>{{$operation->country}}</td>
+										<td>{{$operation->city}}</td>
+										<td>{{$operation->address}}</td>
+										<td>{{$operation->price}} $ </td>
+										<td>{{$operation->start}}</td>
+										<td>{{$operation->end}}</td>
+										<td>{{$operation->created_at->diffForHumans()}}</td>
 										<td class="text-right">
 											<div class="dropdown dropdown-action">
 												<a href="#" class="action-icon dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="fa fa-ellipsis-v"></i></a>
 												<div class="dropdown-menu dropdown-menu-right">
-												<form action="" method="post">
-												@csrf
-													<a class="dropdown-item" href="{{route('schedule.edit',$schedule->id)}}"><i class="fa fa-pencil m-r-5"></i> Edit</a>
-												
-													<a class="dropdown-item" href="#" data-toggle="modal" data-target="#delete_patient"><i class="fa fa-trash-o m-r-5"></i> Delete</a>
+												<form action="{{route('operation.delete',$operation->id)}}" method="post">
+													@csrf
+													@method('delete')
+														<a class="dropdown-item" style="width:200px; padding-left:76px;" href="{{route('operation.edit',$operation->id)}}"><i class="fa fa-pencil m-r-5"></i> Edit</a>
+
+														<button style="border:none; width:200px">
+
+															<i class="fa fa-trash-o m-r-5"></i> Delete
+
+														</button>
+
 												</form>
 												</div>
 											</div>

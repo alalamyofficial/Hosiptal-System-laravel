@@ -22,7 +22,7 @@ class CreateAmbulancesTable extends Migration
             $table->string('city');
             $table->integer('age');
             $table->string('gender');
-
+            $table->integer('user_id');
             $table->timestamps();
         });
     }

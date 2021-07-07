@@ -59,6 +59,8 @@ class EmployeeController extends Controller
             'age' => "required",
             'role' => "required",
             'bio' => "required",
+            'start' => "required",
+            'end' => "required",
     
         ]);
 
@@ -74,6 +76,8 @@ class EmployeeController extends Controller
         $employees->city = $request->city;
         $employees->bio = $request->bio;
         $employees->gender = $request->gender;
+        $employees->start = $request->start;
+        $employees->end = $request->end;
 
 
 
@@ -144,6 +148,8 @@ class EmployeeController extends Controller
             'age' => "required",
             'role' => "required",
             'bio' => "required",
+            'start' => "required",
+            'end' => "required",
     
         ]);
 
@@ -172,6 +178,8 @@ class EmployeeController extends Controller
                 'city' => $request->city,
                 "bio" => $request->bio,
                 "gender" => $request->gender,
+                "start" => $request->start,
+                "end" => $request->end,
                 "image" => 'public/imgs/'.$new_image,
             ];
 
@@ -189,6 +197,8 @@ class EmployeeController extends Controller
                 'city' => $request->city,
                 "bio" => $request->bio,
                 "gender" => $request->gender,
+                "start" => $request->start,
+                "end" => $request->end,
             ];
 
         }
@@ -203,14 +213,6 @@ class EmployeeController extends Controller
 
         return redirect()->route('employee.show');
 
-
-
-
-
-
-
-
-
     }
 
     /**
@@ -219,8 +221,16 @@ class EmployeeController extends Controller
      * @param  \App\Employee  $employee
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Employee $employee)
+    public function destroy(Employee $employee,$id)
     {
-        //
+        $employee = Employee::findOrFail($id);
+
+        $employee->destroy($id);
+
+        Alert::error('Success', 'Employee Deleted Successfully !');
+
+
+        return redirect()->route('employee.show');
+
     }
 }

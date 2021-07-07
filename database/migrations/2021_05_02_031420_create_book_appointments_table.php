@@ -25,10 +25,9 @@ class CreateBookAppointmentsTable extends Migration
             $table->string('city');
             $table->integer('zip_code');
             $table->string('email');
-            $table->date('appointment');
-            $table->time('start');
             $table->integer('doctor_id');
             $table->integer('user_id');
+            $table->boolean('status');
             $table->timestamps();
         });
     }

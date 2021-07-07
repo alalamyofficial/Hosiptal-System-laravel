@@ -10,6 +10,7 @@
     <title>{{ config('app.name', 'Laravel') }}</title>
 
 
+    <link rel="icon" href="{{asset('assets/img/favicon.png')}}">
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
@@ -70,9 +71,9 @@
 
                     <ul class="navbar-nav" style="position:relative; margin-left:20px">
 
-                    <strong><a href="{{route('user.doctors')}}">
+                    <strong><a href="{{route('user.vaccine.request')}}">
 
-                        Doctors
+                        Vaccine
                     </a>
                     </strong>
 
@@ -91,16 +92,23 @@
 
                     <ul class="navbar-nav" style="position:relative; margin-left:20px;">
 
-                    <strong><a href="{{route('ambulance.create')}}">
+                        <strong><a href="{{route('ambulance.create')}}">
 
-                         Ambulance
-                    </a>
-                    </strong>
+                            Ambulance
+                        </a>
+                        </strong>
 
                     </ul>
 
+                    <ul class="navbar-nav" style="position:relative; margin-left:20px;">
 
+                        <strong><a href="{{route('user.bed.request')}}">
 
+                            Bed
+                        </a>
+                        </strong>
+
+                    </ul>
 
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ml-auto">
@@ -120,7 +128,13 @@
                                     {{ Auth::user()->name }} <span class="caret"></span>
                                 </a>
 
+
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+
+                                    <a class="dropdown-item" href="{{route('editProfile')}}">
+                                        Edit
+                                    </a>
+                                   
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">

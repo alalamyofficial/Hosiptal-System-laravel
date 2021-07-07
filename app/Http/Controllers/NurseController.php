@@ -257,8 +257,15 @@ class NurseController extends Controller
      * @param  \App\Nurse  $nurse
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Nurse $nurse)
+    public function destroy(Nurse $nurse, $id)
     {
-        //
+        $nurse = Nurse::findOrFail($id);
+
+        $nurse->destroy($id);
+
+        Alert::error('Success', 'Nurse Deleted Successfully !');
+
+
+        return redirect()->route('nurse.show');        
     }
 }

@@ -15,9 +15,11 @@ class CreateOperationsTable extends Migration
     {
         Schema::create('operations', function (Blueprint $table) {
             $table->increments('id');
-            // $table->integer('doctor_id');
-            // $table->integer('nurse_id');
-            // $table->integer('patient_id');
+            $table->string('doctor');
+            $table->string('nurse');
+            $table->string('patient');
+            $table->integer('department_id');
+            $table->string('operation_type');
             $table->string('country');
             $table->string('city');
             $table->string('address');

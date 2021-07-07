@@ -10,6 +10,7 @@ use App\Mail;
 use App\Doctor;
 use App\Nurse;
 use App\Patient;
+use App\Department;
 
 class OperationController extends Controller
 {
@@ -20,7 +21,13 @@ class OperationController extends Controller
      */
     public function index()
     {
+        $mails = Mail::all();
 
+        $dash_settings = DashboardSettings::all();
+
+        $operations = Operation::all();
+
+        return view('admin.operation.show',compact('dash_settings','mails','operations'));
 
     }
 
@@ -34,7 +41,6 @@ class OperationController extends Controller
 
         $mails = Mail::all();
 
-        // $departments = Department::all();
         $dash_settings = DashboardSettings::all();
 
         $doctors = Doctor::all();
@@ -43,7 +49,9 @@ class OperationController extends Controller
 
         $patients = Patient::all();
 
-        return view('admin.operation.create',compact('dash_settings','mails','doctors','nurses','patients'));
+        $departments = Department::all();
+
+        return view('admin.operation.create',compact('dash_settings','mails','departments','doctors','nurses','patients'));
     }
 
     /**
@@ -56,9 +64,10 @@ class OperationController extends Controller
     {
         $this->validate($request,[
 
-            // 'doctor_id' => 'required',
-            // 'nurse_id' => 'required',
-            // 'patient_id' => 'required',
+            'doctor' => 'required',
+            'nurse' => 'required',
+            'patient' => 'required',
+            'department_id' => 'required',
             'country' => 'required',
             'city' => 'required',
             'address' => 'required',
@@ -71,9 +80,11 @@ class OperationController extends Controller
 
         $operations = new Operation;
         
-        // $operations->doctor_id = $request->doctor_id;
-        // $operations->nurse_id = $request->nurse_id;
-        // $operations->patient_id = $request->patient_id;
+        $operations->doctor = $request->doctor;
+        $operations->nurse = $request->nurse;
+        $operations->patient = $request->patient;
+        $operations->department_id = $request->department_id;
+        $operations->operation_type = $request->operation_type;
         $operations->country = $request->country;
         $operations->city = $request->city;
         $operations->address = $request->address;
@@ -81,9 +92,7 @@ class OperationController extends Controller
         $operations->start = $request->start;
         $operations->end = $request->end;
 
-        $operations->doctors()->attach($request->input('doctors'));
-        $operations->nurses()->attach($request->nurses);
-        $operations->patients()->attach($request->patients);
+
 
         $operations->save();
 
@@ -112,9 +121,18 @@ class OperationController extends Controller
      * @param  \App\Operation  $operation
      * @return \Illuminate\Http\Response
      */
-    public function edit(Operation $operation)
+    public function edit(Operation $operation, $id)
     {
-        //
+
+        $operation = Operation::findOrFail($id);    
+        
+        $mails = Mail::all();
+
+        $dash_settings = DashboardSettings::all();
+
+        $departments = Department::all();
+
+        return view('admin.operation.edit',compact('dash_settings','mails','departments','operation'));
     }
 
     /**
@@ -124,9 +142,49 @@ class OperationController extends Controller
      * @param  \App\Operation  $operation
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Operation $operation)
+    public function update(Request $request, Operation $operation, $id)
     {
-        //
+        // $operation = Operation::findOrFail($id);    
+
+        $this->validate($request,[
+
+            'doctor' => 'required',
+            'nurse' => 'required',
+            'patient' => 'required',
+            'department_id' => 'required',
+            'country' => 'required',
+            'city' => 'required',
+            'address' => 'required',
+            'price' => 'required',
+            'start' => 'required',
+            'end' => 'required',
+
+
+        ]);
+
+        $update_operation = [
+
+            'doctor' => $request->doctor,
+            'nurse' => $request->nurse,
+            'patient' => $request->patient,
+            'department_id' => $request->department_id,
+            'country' => $request->country,
+            'city' => $request->city,
+            'address' => $request->address,
+            'price' => $request->price,
+            'start' => $request->start,
+            'end' => $request->end
+
+        ];
+
+        Operation::whereId($id)->update($update_operation);
+
+
+        Alert::success('Success', 'Operation Updated Successfully !');
+
+
+        return redirect()->route('operation.show');
+        
     }
 
     /**
@@ -135,8 +193,16 @@ class OperationController extends Controller
      * @param  \App\Operation  $operation
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Operation $operation)
+    public function destroy(Operation $operation, $id)
     {
-        //
+        $operation = Operation::findOrFail($id);    
+
+        $operation->destroy($id);    
+
+        Alert::error('Success', 'Operation Deleted Successfully !');
+
+
+        return redirect()->route('operation.show');
+
     }
 }

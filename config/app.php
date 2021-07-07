@@ -165,8 +165,9 @@ return [
         PragmaRX\Tracker\Vendor\Laravel\ServiceProvider::class,
         Shetabit\Visitor\Provider\VisitorServiceProvider::class,
         Yajra\Disqus\DisqusServiceProvider::class,
-        Cyrildewit\PageVisitsCounter\PageVisitsCounterServiceProvider::class,
+        // Cyrildewit\PageVisitsCounter\PageVisitsCounterServiceProvider::class,
         ConsoleTVs\Charts\ChartsServiceProvider::class,
+        StreamLab\StreamLabProvider\StreamLabServiceProvider::class,
 
 
     ],

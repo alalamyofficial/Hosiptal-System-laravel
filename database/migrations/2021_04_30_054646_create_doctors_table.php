@@ -17,7 +17,7 @@ class CreateDoctorsTable extends Migration
             $table->increments('id');
             $table->string('first_name');
             $table->string('last_name');
-            $table->string('email');
+            $table->string('email')->unique();
             $table->date('date_of_birth');
             $table->boolean('gender');
             $table->string('phone_number');
@@ -26,7 +26,7 @@ class CreateDoctorsTable extends Migration
             $table->string('city');
             $table->string('age');
             $table->string('cv');
-            $table->text('bio');
+            $table->text('bio',5000);
             $table->time('start');
             $table->time('end');
             $table->integer('department_id');

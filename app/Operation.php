@@ -11,21 +11,30 @@ class Operation extends Model
 {
     protected $fillable = [
 
-        // 'doctor_id',
-        // 'nurse_id',
-        // 'patient_id',
+        'patient',
+        'operation_type',
         'country',
         'city',
         'address',
         'price',
         'start',
         'end',
+        'department_id',
+        'doctor',
+        'nurse' ,
 
     ];
 
+    // protected $casts = [
+
+    //     'doctor'=> 'array',
+    //     'nurse' => 'array',
+
+    // ];
+
     public function doctors()
     {
-        return $this->belongsToMany('App\Doctor');
+        return $this->belongsToMany('App\Doctor','doctor_id');
     }
 
     public function nurses()
@@ -36,6 +45,11 @@ class Operation extends Model
     public function patients()
     {
         return $this->belongsToMany('App\Patient');
+    }
+
+    public function departments(){
+
+        return $this->belongsTo(Department::class,'department_id');
     }
 
 

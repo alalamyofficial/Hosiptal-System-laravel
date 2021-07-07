@@ -167,8 +167,14 @@ class DoctorScheduleController extends Controller
      * @param  \App\DoctorSchedule  $doctorSchedule
      * @return \Illuminate\Http\Response
      */
-    public function destroy(DoctorSchedule $doctorSchedule)
+    public function destroy(DoctorSchedule $doctorSchedule, $id)
     {
-        //
+        $schedule = DoctorSchedule::findOrFail($id);
+
+        $schedule->destroy($id);
+
+        Alert::error('Success', 'Doctor Schedule Deleted Successfully !');
+
+        return redirect()->route('schedule.show');
     }
 }

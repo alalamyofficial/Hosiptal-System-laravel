@@ -3,8 +3,9 @@
 
             <div class="content">
                 <div class="row">
-                    <div class="col-sm-12">
-                        <h4 class="page-title">Inbox</h4>
+                        <h5><a class="btn btn-primary" href="{{route('admin.contact')}}">Send Mail</a></h5>
+                    <div class="col-sm-12 col-lg-6">
+                        <br><br><h4 class="page-title">Inbox</h4>
                     </div>
                 </div>
                 <div class="row">

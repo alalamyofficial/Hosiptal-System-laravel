@@ -20,11 +20,11 @@ class CreateAppointmentsTable extends Migration
             $table->integer('department_id');
             $table->time('start');
             $table->time('end');
-            $table->string('patient_email');
+            $table->string('patient_email')->unique();
             $table->string('patient_phone');
             $table->string('age');
             $table->date('date');
-            $table->text('message');
+            $table->text('message',5000);
             $table->timestamps();
         });
     }

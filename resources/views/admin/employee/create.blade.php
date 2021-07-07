@@ -357,6 +357,20 @@
                                     </div>
                                 </div>
 
+                                <div class="col-sm-6 col-md-6 col-lg-6">
+                                    <div class="form-group">
+                                        <label>Start</label>
+                                        <input type="time" class="form-control" name="start">
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-6 col-md-6 col-lg-6">
+                                    <div class="form-group">
+                                        <label>End</label>
+                                        <input type="time" class="form-control" name="end">
+                                    </div>
+                                </div>
+
                     </div>
                             
                             

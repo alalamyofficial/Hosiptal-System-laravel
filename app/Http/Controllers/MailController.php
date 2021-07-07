@@ -6,22 +6,18 @@ use App\Mail;
 use Illuminate\Http\Request;
 use RealRashid\SweetAlert\Facades\Alert;
 use App\DashboardSettings;
+use App\WebsiteSettings;
+use App\Service;
+use App\Department;
+use App\Drug;
 use App\Notifications\Mails;
 use Notification;
 use Illuminate\Notifications\Notifiable;
 use App\User;
+use App\Mail\AdminMail;
 
 class MailController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        //
-    }
 
     /**
      * Show the form for creating a new resource.
@@ -30,7 +26,12 @@ class MailController extends Controller
      */
     public function create()
     {
-        return view('visitors.contact');
+        $settings  = WebsiteSettings::orderBy('id', 'desc')->paginate(1);
+        $services  = Service::orderBy('id', 'desc')->paginate(4);
+        $departments  = Department::orderBy('id', 'desc')->paginate(5);
+        $drugs  = Drug::orderBy('id', 'desc')->paginate(5);
+
+        return view('visitors.contact',compact('settings','services','departments','drugs'));
     }
 
     /**
@@ -99,37 +100,34 @@ class MailController extends Controller
         return view('admin.mails.content',compact('dash_settings','mails'));
     } 
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Mail  $mail
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Mail $mail)
-    {
-        //
-    }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Mail  $mail
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Mail $mail)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Mail  $mail
-     * @return \Illuminate\Http\Response
-     */
     public function destroy(Mail $mail)
     {
         //
     }
+
+    public function contact_form(){
+
+        $dash_settings = DashboardSettings::all();
+        $mails = Mail::all();
+
+        
+        return view('admin.mails.contact',compact('dash_settings','mails'));
+    }
+
+    public function send_mails(Request $request){
+
+        $contact_form_data = array(
+            'name'      =>  $request->name,
+            'email'      =>  $request->email,
+            'subject'      =>  $request->subject,
+            'message'   =>   $request->message
+        );
+
+        \Mail::to('theories619@gmail.com')->send(new AdminMail($contact_form_data));
+
+        return redirect()->back();
+
+    }
+
 }

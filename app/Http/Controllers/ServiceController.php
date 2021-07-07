@@ -152,8 +152,16 @@ class ServiceController extends Controller
      * @param  \App\Service  $service
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Service $service)
+    public function destroy(Service $service, $id)
     {
-        //
+        $service = Service::findOrFail($id);
+
+        $service->destroy($id);
+
+        Alert::error('Success', 'Service Deleted Successfully !');
+
+
+        return redirect()->route('service.show');
+
     }
 }

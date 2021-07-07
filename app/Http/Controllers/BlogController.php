@@ -22,9 +22,9 @@ class BlogController extends Controller
         $departments = Department::all();
         $dash_settings = DashboardSettings::all();
         $mails = Mail::all();
-        $posts = Blog::all();
+        $blogs = Blog::all();
 
-        return view('admin.blog.show',compact('doctors','dash_settings','departments','mails','posts'));
+        return view('admin.blog.show',compact('doctors','dash_settings','departments','mails','blogs'));
     }
 
     /**
@@ -55,6 +55,7 @@ class BlogController extends Controller
             'title' => 'required',
             'image' => 'required',
             'description' => 'required',
+            'tags' => 'required',
 
 
         ]);
@@ -63,6 +64,7 @@ class BlogController extends Controller
 
         $posts->title = $request->title;
         $posts->description = $request->description;
+        $posts->tags = $request->tags;
 
         
         $img_file = $request->image;
@@ -98,9 +100,15 @@ class BlogController extends Controller
      * @param  \App\Blog  $blog
      * @return \Illuminate\Http\Response
      */
-    public function edit(Blog $blog)
+    public function edit(Blog $blog,$id)
     {
-        //
+        $blog = Blog::findOrFail($id);
+        $departments = Department::all();
+        $dash_settings = DashboardSettings::all();
+        $mails = Mail::all();
+
+        return view('admin.blog.edit',compact('doctors','dash_settings','departments','mails','blog'));
+
     }
 
     /**
@@ -110,9 +118,66 @@ class BlogController extends Controller
      * @param  \App\Blog  $blog
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Blog $blog)
+    public function update(Request $request, Blog $blog , $id)
     {
-        //
+        
+        $this->validate($request,[
+
+            'title' => 'required',
+            'image' => 'required',
+            'description' => 'required',
+
+
+        ]);
+
+        $blog = Blog::findOrFail($id);
+
+
+        if($request->has('image')){
+
+
+            $img_file = $request->image;
+    
+            $new_image = time().$img_file->getClientOriginalName();
+    
+            $img_file->move('public/imgs/',$new_image);
+    
+            $blog->image = 'public/imgs/'.$new_image;
+
+            $update_blog =[
+
+                "title" => $request->title,
+                "description" => $request->description,
+                "tags" => $request->tags,
+                "image" => 'public/imgs/'.$new_image,
+
+            ];
+
+        }else{
+
+
+            $update_blog =[
+
+                "title" => $request->title,
+                "description" => $request->description,
+                "image" => 'public/imgs/'.$new_image,
+                "tags" => $request->tags,
+
+            ];
+
+        }
+        
+
+        $blog->update($update_blog);
+
+
+
+        $blog->save();
+
+        Alert::success('Success', 'Blog Edited Successfully !');
+
+
+        return redirect()->route('blog.show');
     }
 
     /**
@@ -121,11 +186,30 @@ class BlogController extends Controller
      * @param  \App\Blog  $blog
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Blog $blog)
+    public function destroy(Blog $blog,$id)
     {
-        //
+        $blog = Blog::findOrFail($id);
+
+        $blog->destroy($id);
+
+        Alert::error('Success', 'Blog Deleted Successfully !');
+
+
+        return redirect()->route('blog.show');
     }
 
+    public function single_blog($id){
+
+        $dash_settings = DashboardSettings::all();
+
+        $mails  = Mail::all();
+
+        $blogs  = Blog::where('id',$id)->get();
+
+
+        return view('admin.blog.single_blog',compact('dash_settings','mails','blogs'));
+
+    }
 
 
 }

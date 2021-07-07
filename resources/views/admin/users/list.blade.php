@@ -1,94 +1,99 @@
 @extends('admin.admin_layout')
 @section('content')
 
+<div class="content">
+    <div class="row">
+        <div class="col-sm-4 col-3">
 
+        @if ($errors->any())
+        <div class="alert alert-danger">
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+            </div>
+        @endif
 
-            <div class="content">
-                <div class="row">
-                    <div class="col-sm-4 col-3">
+            <h4 class="page-title">Users</h4>
+        </div>
 
-                    @if ($errors->any())
-                    <div class="alert alert-danger">
-                        <ul>
-                            @foreach ($errors->all() as $error)
-                                <li>{{ $error }}</li>
-                            @endforeach
-                        </ul>
-                        </div>
-                    @endif
+    </div><br><br>
 
-                        <h4 class="page-title">Users</h4>
-                    </div>
+    <h5>Admins</h5>  
 
-                </div><br><br>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="table-responsive">
+                <table class="table table-striped custom-table">
+                    <thead>
+                        <tr>
 
-                <h5>Admins</h5>  
+                            <th style="min-width:200px;">Name</th>
+                            <th>Email</th>
+                            <th>Mobile</th>
+                            <th>Role</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach($admins as $admin)
+                        <tr>
+                            <td>
+                                <h2>{{$admin->admin_name}}</h2>
+                            </td>
+                            <td>{{$admin->admin_email}}</td>
+                            <td>{{$admin->admin_phone}}</td>
+                            <td>
+                                <span class="custom-badge status-green">Admins</span>
+                            </td>
+                        </tr>
+                        @endforeach    
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>  <br>
 
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="table-responsive">
-                            <table class="table table-striped custom-table">
-                                <thead>
-                                    <tr>
+    <h5>Users</h5>  
 
-                                        <th style="min-width:200px;">Name</th>
-                                        <th>Email</th>
-                                        <th>Mobile</th>
-                                        <th>Role</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    @foreach($admins as $admin)
-                                    <tr>
-                                        <td>
-                                            <h2>{{$admin->admin_name}}</h2>
-                                        </td>
-                                        <td>{{$admin->admin_email}}</td>
-                                        <td>{{$admin->admin_phone}}</td>
-                                        <td>
-                                            <span class="custom-badge status-green">Admins</span>
-                                        </td>
-                                    </tr>
-                                    @endforeach    
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>  <br>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="table-responsive">
+            @if(count($users) > 0)
+                <table class="table table-striped custom-table">
+                    <thead>
+                        <tr>
+                            <th style="min-width:200px;">Name</th>
+                            <th>Email</th>
+                            <th style="min-width: 110px;">Join Date</th>
+                            <th>Role</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach($users as $user)
+                        <tr>
+                            <td>
+                                <h2>{{$user->name}}</h2>
+                            </td>
+                            <td>{{$user->email}}</td>
+                            <td>{{$user->created_at->diffForHumans()}}</td>
+                            <td>
+                                <span class="custom-badge status-orange">Users</span>
+                            </td>
+                        </tr>
+                        @endforeach    
+                    </tbody>
+                </table>
+                @else
 
-                <h5>Users</h5>  
+                <p scope="row" class="text-center"><b>No Users Found</b></p>
 
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="table-responsive">
-                            <table class="table table-striped custom-table">
-                                <thead>
-                                    <tr>
+                @endif    
 
-                                        <th style="min-width:200px;">Name</th>
-                                        <th>Email</th>
-                                        <th style="min-width: 110px;">Join Date</th>
-                                        <th>Role</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    @foreach($users as $user)
-                                    <tr>
-                                        <td>
-                                            <h2>{{$user->name}}</h2>
-                                        </td>
-                                        <td>{{$user->email}}</td>
-                                        <td>{{$user->created_at->diffForHumans()}}</td>
-                                        <td>
-                                            <span class="custom-badge status-orange">Users</span>
-                                        </td>
-                                    </tr>
-                                    @endforeach    
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>  <br>
+            </div>
+        </div>
+    </div> 
+    <br>
 
 
 

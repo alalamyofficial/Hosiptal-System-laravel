@@ -49,13 +49,15 @@ class DepartmentController extends Controller
     {
         $this->validate($request,[
 
-            'name'=>'required'
+            'name'=>'required',
+            'description' => 'required'
 
         ]);
 
         $departments = new Department;
 
         $departments->name = $request->name;
+        $departments->description = $request->description;
 
         $departments->save();
 
@@ -105,13 +107,15 @@ class DepartmentController extends Controller
     {
         $this->validate($request,[
 
-            'name' => 'required|min:3'
+            'name' => 'required|min:3',
+            'description' => 'required'
 
         ]);
 
         $update_departments = [
 
-            'name' => $request->name
+            'name' => $request->name,
+            'description' => $request->description
 
         ];
 
@@ -133,8 +137,16 @@ class DepartmentController extends Controller
      * @param  \App\Department  $department
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Department $department)
+    public function destroy(Department $department , $id)
     {
-        //
+        $department = Department::findOrFail($id);
+
+        $department->destroy($id);
+
+        Alert::error('Success', 'Department Deleted Successfully !');
+
+
+        return redirect()->route('department.show');
+        
     }
 }

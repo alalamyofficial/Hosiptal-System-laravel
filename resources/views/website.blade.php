@@ -5,8 +5,8 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>medical</title>
-    <link rel="icon" href="img/favicon.png">
+    <title>Medical</title>
+    <link rel="icon" href="{{asset('assets/img/favicon.png')}}">
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="{{asset('assets/css/bootstrap.min.css')}}">
     <!-- animate CSS -->
@@ -27,6 +27,15 @@
     <link rel="stylesheet" href="{{asset('assets/css/style.css')}}">
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous" />
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/regular.min.css" integrity="sha512-Nqct4Jg8iYwFRs/C34hjAF5og5HONE2mrrUV1JZUswB+YU7vYSPyIjGMq+EAQYDmOsMuO9VIhKpRUa7GjRKVlg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/solid.min.css" integrity="sha512-jQqzj2vHVxA/yCojT8pVZjKGOe9UmoYvnOuM/2sQ110vxiajBU+4WkyRs1ODMmd4AfntwUEV4J+VfM6DkfjLRg==" crossorigin="anonymous" referrerpolicy="no-referrer" />    
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/brands.min.css" integrity="sha512-apX8rFN/KxJW8rniQbkvzrshQ3KvyEH+4szT3Sno5svdr6E/CP0QE862yEeLBMUnCqLko8QaugGkzvWS7uNfFQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.js" integrity="sha512-n/4gHW3atM3QqRcbCn6ewmpxcLAHGaDjpEBu4xZd47N0W2oQ+6q7oc3PXstrJYXcbNU1OHdQ1T7pAP+gi5Yu8g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
 </head>
 
@@ -56,7 +65,9 @@
                                 <li class="nav-item">
                                     <a class="nav-link" href="{{route('all.doctors')}}">Doctors</a>
                                 </li>
-
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{route('all.drugs')}}">Drugs</a>
+                                </li>
                                 <li class="nav-item dropdown">
         
                                 <a class="nav-link" href="{{route('all.services')}}">Services</a>
@@ -91,14 +102,11 @@
             <div class="container">
                 <div class="row">
                     <div class="col-xl-2 col-sm-4 mb-4 mb-xl-0 single-footer-widget">
-                        <h4>Services Link</h4>
+                        <h4>Departments</h4>
                         <ul>
-                            <li><a href="#">Eye treatment</a></li>
-                            <li><a href="#">Skin Surgery</a></li>
-                            <li><a href="#">Diagnosis clinic</a></li>
-                            <li><a href="#"> Dental care</a></li>
-                            <li><a href="#">Neurology service</a></li>
-                            <li><a href="#">Plastic surgery</a></li>
+                        @foreach($departments as $department)
+                            <li><a href="#">{{$department->name}}</a></li>
+                        @endforeach    
                         </ul>
                     </div>
                     <div class="col-xl-2 col-sm-4 mb-4 mb-xl-0 single-footer-widget">
@@ -112,27 +120,8 @@
                         </ul>
                     </div>
 
-                    <div class="col-xl-2 col-sm-4 mb-4 mb-xl-0 single-footer-widget">
-                        <h4>Explore</h4>
-                        <ul>
-                            <li><a href="#">In the community</a></li>
-                            <li><a href="#">IU health foundation</a></li>
-                            <li><a href="#">Family support </a></li>
-                            <li><a href="#">Business solution</a></li>
-                            <li><a href="#">Community clinic</a></li>
-                        </ul>
-                    </div>
-                    <div class="col-xl-2 col-sm-4 mb-4 mb-xl-0 single-footer-widget">
-                        <h4>Resources</h4>
-                        <ul>
-                            <li><a href="#">Lights were season</a></li>
-                            <li><a href="#"> Their is let wherein</a></li>
-                            <li><a href="#">which given over</a></li>
-                            <li><a href="#">Without given She</a></li>
-                            <li><a href="#">Isn two signs think</a></li>
-                        </ul>
-                    </div>
-                    <div class="col-xl-4 col-sm-8 col-md-8 mb-4 mb-xl-0 single-footer-widget">
+
+                    <div class="col-xl-8 col-sm-8 col-md-8 mb-4 mb-xl-0 single-footer-widget">
                         <h4>Newsletter</h4>
                         <p>Seed good winged wherein which night multiply
                             midst does not fruitful</p>
@@ -161,7 +150,7 @@
             <div class="container">
                 <div class="row align-items-center">
                     <p class="footer-text m-0 col-lg-8 col-md-12"><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="ti-heart" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
+                    Copyright &copy; All rights reserved | This template is made with <i class="ti-heart" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Mohamed Alalamey</a>
 <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></p>
                     <div class="col-lg-4 col-md-12 text-center text-lg-right footer-social">
                         <a href="#"><i class="ti-facebook"></i></a>
@@ -182,9 +171,9 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 
     <!-- jquery plugins here-->
 
-    <script src="js/jquery-1.12.1.min.js"></script>
+    <script src="{{asset('assets/js/jquery-1.12.1.min.js')}}"></script>
     <!-- popper js -->
-    <script src="js/popper.min.js"></script>
+    <script src="{{asset('assets/js/popper.min.js')}}"></script>
     <!-- bootstrap js -->
     <script src="{{asset('assets/js/bootstrap.min.js')}}"></script>
     <!-- easing js -->

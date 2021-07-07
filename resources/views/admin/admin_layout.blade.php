@@ -1,49 +1,32 @@
 <!DOCTYPE html>
 <html lang="en">
 
-
-
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
     <meta name="csrf-token" content="{{ csrf_token() }}" />
-    <link rel="shortcut icon" type="image/x-icon" href="{{asset('assets2/img/favicon.ico')}}">
+    <link rel="icon" href="{{asset('assets/img/favicon.png')}}">
     <title>Preclinic - Medical & Hospital</title>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="{{asset('assets2/css/bootstrap.min.css')}}">
     <link rel="stylesheet" type="text/css" href="{{asset('assets2/css/font-awesome.min.css')}}">
     <link rel="stylesheet" type="text/css" href="{{asset('assets2/css/style.css')}}">
     <link rel="stylesheet" type="text/css" href="{{asset('assets2/css/select2.min.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{asset('assets2/css/tagsinput.css')}}">
     <link rel="stylesheet" type="text/css" href="{{asset('assets2/css/bootstrap-datetimepicker.min.css')}}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.9.0/fullcalendar.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/brands.min.css" integrity="sha512-apX8rFN/KxJW8rniQbkvzrshQ3KvyEH+4szT3Sno5svdr6E/CP0QE862yEeLBMUnCqLko8QaugGkzvWS7uNfFQ==" crossorigin="anonymous" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/fontawesome.min.css" integrity="sha512-OdEXQYCOldjqUEsuMKsZRj93Ht23QRlhIb8E/X0sbwZhme8eUw6g8q7AdxGJKakcBbv7+/PX0Gc2btf7Ru8cZA==" crossorigin="anonymous" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/regular.min.css" integrity="sha512-Nqct4Jg8iYwFRs/C34hjAF5og5HONE2mrrUV1JZUswB+YU7vYSPyIjGMq+EAQYDmOsMuO9VIhKpRUa7GjRKVlg==" crossorigin="anonymous" />
-    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/solid.min.css" integrity="sha512-jQqzj2vHVxA/yCojT8pVZjKGOe9UmoYvnOuM/2sQ110vxiajBU+4WkyRs1ODMmd4AfntwUEV4J+VfM6DkfjLRg==" crossorigin="anonymous" /> -->
-
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous"></script>
-    <!-- <script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script> -->
-
     <script src="https://cdn.ckeditor.com/4.16.0/standard/ckeditor.js"></script>
 
 
-    <!-- <script type="text/javascript">
-    tinymce.init({
-        selector: '#mytextarea'
-    });
-    </script> -->
     <script type="text/javascript">
         $(document).ready(function () {
             $('.ckeditor').ckeditor();
         });
     </script>
-    
-    <!-- <script>
-            CKEDITOR.replace('mytextarea');
-    </script> -->
-
-    <!-- @notifyCss -->
-    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.9.0/fullcalendar.js"></script> -->
 
 
     <!--[if lt IE 9]>
@@ -70,8 +53,6 @@
                     
                     <i class="fa fa-bell-o"></i> <span class="badge badge-pill bg-danger float-right">1
                     
-                    <!-- <i class="fa fa-bell-o"></i> <span class=" float-right"> -->
-
                     </span>
                     </a>
 
@@ -110,8 +91,6 @@
                     <a href="javascript:void(0);" id="open_msg_box" class="hasnotifications nav-link">
                      
                     <i class="fa fa-comment-o"></i> <span class="badge badge-pill bg-danger float-right">1
-
-                    <!-- <i class="fa fa-comment-o"></i> <span class="float-right"> -->
                     
                     
                     </span>
@@ -129,7 +108,6 @@
 						<a class="dropdown-item" href="profile.html">My Profile</a>
 						<a class="dropdown-item" href="edit-profile.html">Edit Profile</a>
 						<a class="dropdown-item" href="settings.html">Settings</a>
-						<!-- <a class="dropdown-item" href="login.html">Logout</a> -->
                         <a class="dropdown-item" href="{{ route('logout') }}"
                             onclick="event.preventDefault();
                                             document.getElementById('logout-form').submit();">
@@ -216,7 +194,11 @@
                         </li>
 
                         <li>
-                            <a href="{{route('admin.reservation')}}"><i class="fa fa-ticket"></i> <span>Reservations</span> </a>
+                            <a><i class="fa fa-ticket"></i> <span>Reservations</span> <span class="menu-arrow"></span></a>
+                            <ul style="display: none;">
+								<li><a href="{{route('admin.reservation.pending')}}"> Pending Reservations </a></li>
+								<li><a href="{{route('admin.reservation')}}"> All Reservations </a></li>
+							</ul>
                         </li>
 
                         <li>
@@ -245,6 +227,29 @@
 								<li><a href="{{route('service.show')}}">Services</a></li>
 							</ul>
 						</li>
+						<li class="submenu">
+							<a href=""><i class="fa fa-medkit"></i> <span> Drugs </span> <span class="menu-arrow"></span></a>
+							<ul style="display: none;">
+                                <li><a href="{{route('drug.create')}}">Add Drug</a></li>
+								<li><a href="{{route('drug.show')}}">Drugs</a></li>
+							</ul>
+						</li>
+                        
+                        <li>
+                            <a><i class="fa fa-shield"></i> <span>Vaccine</span> <span class="menu-arrow"></span> </a>
+                            <ul style="display: none;">
+                                <li><a href="{{route('vaccine.pending')}}">Pending Vaccines</a></li>
+								<li><a href="{{route('vaccine.show')}}">Vaccines</a></li>
+							</ul>
+                        </li>
+
+                        <li>
+                            <a><i class="fa fa-bed"></i> <span>Bed</span> <span class="menu-arrow"></span> </a>
+                            <ul style="display: none;">
+                                <li><a href="{{route('bed.pending')}}">Pending Beds</a></li>
+								<li><a href="{{route('bed.show')}}">Beds</a></li>
+							</ul>
+                        </li>
 
                         <li>
                             <a><i class="far fa-heart"></i></i> <span>Operations</span><span class="menu-arrow"></span></a>
@@ -265,9 +270,13 @@
                             <a href="{{route('admin.mails')}}"><i class="fa fa-envelope-square"></i> <span>Mails</span> <span class="badge badge-pill bg-primary float-right">{{count($mails)}}</span></a>
                         </li>
 
-                        <li>
-                            <a href="chat.html"><i class="fa fa-code"></i> <span>Embadded</span></a>
-                        </li>
+                        <li class="submenu">
+							<a href="#"><i class="fa fa-flag-o"></i> <span> Reports </span> <span class="menu-arrow"></span></a>
+                            <ul style="display: none;">
+                                <li><a href="{{route('report.create')}}">Add Report</a></li>
+                                <li><a href="{{route('report.show')}}">Report</a></li>
+                            </ul>
+						</li>
 
                         <li>
                             <a href="{{route('admin.visitor')}}"><i class="far fa-user-circle"></i> <span>Who Visit me</span></a>
@@ -303,21 +312,57 @@
                     <div class="drop-scroll msg-list-scroll" id="msg_list">
                         <ul class="list-box">
 
-                            <li>
-                                <a href="chat.html">
-                                    <div class="list-item">
-                                        <div class="list-left">
-                                            <span class="avatar">T</span>
-                                        </div>
-                                        <div class="list-body">
-                                            <span class="message-author"></span>
-                                            <span class="message-time"></span>
-                                            <div class="clearfix"></div>
-                                            <span class="message-content"></span>
-                                        </div>
-                                    </div>
-                                </a>
-                            </li>
+
+                        <?php   
+
+                            $servername = "localhost";
+                            $username = "root";
+                            $password = "";
+                            $dbname = "health_care";
+
+                            // Create connection
+                            $conn = new mysqli($servername, $username, $password, $dbname);
+                            // Check connection
+                            if ($conn->connect_error) {
+                            die("Connection failed: " . $conn->connect_error);
+                            }
+
+                            $sql = "SELECT id, notifiable_type ,created_at FROM notifications";
+                            $result = $conn->query($sql);
+
+                            if ($result->num_rows > 0) {
+                            // output data of each row
+                            while($row = $result->fetch_assoc()) {
+                            
+                                    echo"
+                                    <li>
+                                        <a href='chat.html'>
+                                            <div class='list-item'>
+                                                <div class='list-left'>
+                                                    <span class='avatar'>E</span>
+                                                </div>
+                                                <div class='list-body'>
+                                                    <span class='message-author'></span>
+                                                    <span class='message-time'>$row[created_at]</span>
+                                                    <div class='clearfix'></div>
+                                                    <span class='message-content'></span>
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </li>
+                                    ";
+                                
+                                
+                                        
+                            }
+
+                            } else {
+                                echo "0 results";
+                            }
+                            $conn->close();
+                            ?>
+                                                                                
+
 
 
                         </ul>
@@ -355,11 +400,8 @@
     <script src="{{asset('assets2/js/bootstrap-datetimepicker.min.js')}}"></script>
     <script src="{{asset('assets2/js/select2.min.js')}}"></script>
 	<script src="{{asset('assets2/js/moment.min.js')}}"></script>
+    <script src="{{asset('assets2/js/tagsinput.js')}}"></script>
 
-    <!-- @include('notify::messages')
-
-    @notifyJs -->
-    <!-- <x:notify-messages /> -->
 
 
 </body>

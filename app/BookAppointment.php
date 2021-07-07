@@ -25,10 +25,11 @@ class BookAppointment extends Model
         'address' ,
         'zip_code' ,
         'email' ,
-        'appointment',
-        'start' ,
         'doctor_id' ,
-        'user_id'
+        'user_id',
+        'status'
+        // 'appointment',
+        // 'start' ,
 
     ];
 
